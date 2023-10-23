@@ -33,8 +33,20 @@ public class Plateau{
 		Territoire australieOccidentale = new Territoire("Australie Occidentale");
 		Territoire australieOrientale = new Territoire("Australie Orientale");
 		//-------------------Amérique du Nord-------------------------
+		Territoire alaska = new Territoire("Alaska");
+		Territoire territoireNordOuest = new Territoire("Territoire du Nord-Ouest");
+		Territoire groenland = new Territoire("Groenland");
+		Territoire alberta = new Territoire("Alberta");
+		Territoire ontario = new Territoire("Ontario");
+		Territoire canada = new Territoire("Canada de l'Est");
+		Territoire EUOuest = new Territoire("Etats Unis de l'Ouest");
+		Territoire EUEst = new Territoire("Etats Unis de l'Est");
+		Territoire ameriqueCentrale = new Territoire("Amérique Centrale");
 		//-------------------Amérique du Sud--------------------------
-		
+		Territoire venezuela = new Territoire("Vénézuela");
+		Territoire bresil = new Territoire("Brésil");
+		Territoire perou = new Territoire("Pérou");
+		Territoire argentine = new Territoire("Argentine");
 
 		
 		//intégration des territoires dans les continents
