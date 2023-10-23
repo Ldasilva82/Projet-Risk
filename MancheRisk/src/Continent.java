@@ -2,20 +2,18 @@ import java.util.List;
 
 public class Continent {
 	private String nomContinent;
-	private List<Continent> continent;
+	private int point;
+	private ArrayList<Territoire> territoires;
 
-	public Continent(){
+	public Continent(String nomContinent, int point){
 		this.nomContinent = nomContinent;
-		this.continent = continent;
+		this.point = point;
 	}
 
-	public String getContinent(){
+	public String getnomContinent(){
 		return nomContinent;
 	}
-
-
-
-    
-
-
+	public ArrayList<Territoire> getList(){
+		return this.territoires;
+	}
 }

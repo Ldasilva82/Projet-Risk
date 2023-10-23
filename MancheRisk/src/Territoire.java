@@ -1,12 +1,12 @@
 public class Territoire {
     private String nomTerritoire;
-    private int nbTerritoire;
+    private int nbRegiment;
     private Joueur joueurProprietaire; 
 
 
-    public Territoire(){
-        this.nomTerritoire = nomTerritoire;
-        this.nbTerritoire = nbTerritoire;
-        this.joueurProprietaire = joueurProprietaire;
+    public Territoire(String nomTerrit){
+        this.nomTerritoire = nomTerrit;
+        this.nbRegiment = 0;
+        this.joueurProprietaire = null;
     }
 }
