@@ -37,17 +37,17 @@ public class Plateau{
 		Territoire argentine = new Territoire("Argentine");
 		//---------------------------Asie----------------------------
 		Territoire oural = new Territoire("Oural");
-		Territoire oural = new Territoire("Sibérie");
-		Territoire oural = new Territoire("Yakoutie");
-		Territoire oural = new Territoire("Kamchatka");
-		Territoire oural = new Territoire("Irkoutsk");
-		Territoire oural = new Territoire("Mongolie");
-		Territoire oural = new Territoire("Japon");
-		Territoire oural = new Territoire("Afghanistan");
-		Territoire oural = new Territoire("Chine");
-		Territoire oural = new Territoire("Moyen-Orient");
-		Territoire oural = new Territoire("Inde");
-		Territoire oural = new Territoire("Asie du Sud-Est");
+		Territoire siberie = new Territoire("Sibérie");
+		Territoire yakoutie = new Territoire("Yakoutie");
+		Territoire kamchatka = new Territoire("Kamchatka");
+		Territoire irkoutsk = new Territoire("Irkoutsk");
+		Territoire mongolie = new Territoire("Mongolie");
+		Territoire japon = new Territoire("Japon");
+		Territoire afghanistan = new Territoire("Afghanistan");
+		Territoire chine = new Territoire("Chine");
+		Territoire moyenOrient = new Territoire("Moyen-Orient");
+		Territoire inde = new Territoire("Inde");
+		Territoire asieSudEst = new Territoire("Asie du Sud-Est");
 		//----------------------Australie-----------------------------
 		Territoire indonesie = new Territoire("Indonésie");
 		Territoire nouvGuinee = new Territoire("Nouvelle Guinée");
@@ -64,9 +64,15 @@ public class Plateau{
 		
 		//intégration des territoires dans les continents
 		//-----------------------Afrique-----------------------------
-		continents[1].getList().
+		continents[1].getList() = new Territoire[]{egypte, afriqueNord, afriqueOrientale, afriqueCentrale, afriqueSud, madagascar};
 		//------------------Amérique du Nord-------------------------
+		continents[2].getList() = new Territoire[]{alaska, territoireNordOuest, groenland, alberta, ontario, canada, EUOuest, EUEst, ameriqueCentrale};
 		//-------------------Amérique du Sud-------------------------
+		continents[3].getList() = new Territoire[]{venezuela, bresil, perou, argentine};
+		//-------------------------Asie------------------------------
+
+		//-----------------------Australie---------------------------
+
 		//------------------------Europe-----------------------------
 		continents[5].getList().add(islande);
 		continents[5].getList().add(gb);
