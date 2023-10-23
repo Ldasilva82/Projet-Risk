@@ -16,8 +16,4 @@ public class Continent {
 	public ArrayList<Territoire> getList(){
 		return this.territoires;
 	}
-	// il faut une méthode d'ajout de territoire dans la liste 
-	public void ajouterTerritVoisin(Territoire voisinàAjouter){
-		//TODO
-	}
 }

@@ -13,8 +13,8 @@ public class Plateau{
 		continents[6] = new Continent("Australie", 2);
 		//création des territoires
 		//------------------------Europe-----------------------------
-		Territoire Islande = new Territoire("Islande");
-		Territoire GB = new Territoire("Grande-Bretagne");
+		Territoire islande = new Territoire("Islande");
+		Territoire gB = new Territoire("Grande-Bretagne");
 		Territoire europeOuest = new Territoire("Europe de l’Ouest");
 		Territoire europeSud = new Territoire("Europe de Sud");
 		Territoire europeNord = new Territoire("Europe de Nord");
@@ -38,7 +38,12 @@ public class Plateau{
 
 		
 		//intégration des territoires dans les continents
-		continents[5].getList().add(territEurope);
+		continents[5].getList().add(islande);
+		continents[5].getList().add(gb);
+		continents[5].getList().add(europeOuest);
+		continents[5].getList().add(europeSud);
+		continents[5].getList().add(islande);
+		continents[5].getList().add(islande);
 		//intégration des listes de territoires voisins par territoires 
 		egypte.getList().add(afriqueNord);
 		

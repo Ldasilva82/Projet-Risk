@@ -17,8 +17,9 @@ public class Manche{
     	for(int i=0; i<nbJoueur; i++) {
     		Scanner scanner = new Scanner(System.in);
     		System.out.println("nom du joueur");
+            //voir comment 
     		Joueur player = new Joueur(scanner.nextLine());
-    		player. 
+    		player.lancerDé();
     		listjoueur.add(player);
     	}
     	
