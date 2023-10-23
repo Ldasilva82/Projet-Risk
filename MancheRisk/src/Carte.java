@@ -6,4 +6,8 @@ public class Carte {
 		this.typeSymbole =typeSymbole;
 		this.territoire = territoire;
 	}
+
+    public String typeSymbole() {
+		return this.typeSymbole;
+	}
 }
