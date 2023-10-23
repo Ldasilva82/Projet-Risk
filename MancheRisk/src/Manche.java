@@ -1,11 +1,29 @@
 public class Manche{
-    //attribute 
+    	//attribute 
     private Plateau plateau;
     private int nbEchange;
+    private ArrayList<Joueur> listjoueur;
+    private Scanner scanner;
     //constructor 
-    public Manche(int nbJoueur){
-        débuterManche()
-        setOrdre()
+    public Manche(){
+    	//lancer le jeu avec 5 joueur 
+        débuterManche(5);
     }
-
+    //method 
+    private void débuterManche(int nbJoueur) {
+    	//créer la liste de l'ordre de passage
+    	ArrayList<Joueur> listjoueur = ArrayList<Joueur>();
+    	//créer les joueurs 
+    	for(int i=0; i<nbJoueur; i++) {
+    		Scanner scanner = new Scanner(System.in);
+    		System.out.println("nom du joueur");
+    		Joueur player = new Joueur(scanner.nextLine());
+    		player. 
+    		listjoueur.add(player);
+    	}
+    	
+    }
+    private ArrayList<> setOrdreJoueur(int nbJoueur){
+    	
+    }
 }
