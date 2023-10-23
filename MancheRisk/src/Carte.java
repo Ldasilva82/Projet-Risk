@@ -10,4 +10,10 @@ public class Carte {
     public String typeSymbole() {
 		return this.typeSymbole;
 	}
+
+    public Territoire territoire(){
+        return this.territoire;
+    }
+
+
 }
