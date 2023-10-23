@@ -27,17 +27,20 @@ public class Plateau{
 		Territoire afriqueCentrale = new Territoire("Afrique Centrale");
 		Territoire afriqueSud = new Territoire("Afrique du Sud");
 		Territoire madagascar = new Territoire("Madagascar");
-		//------------------------Australie-----------------------------
+		//----------------------Australie-----------------------------
 		Territoire indonesie = new Territoire("Indonésie");
 		Territoire nouvGuinee = new Territoire("Nouvelle Guinée");
 		Territoire australieOccidentale = new Territoire("Australie Occidentale");
 		Territoire australieOrientale = new Territoire("Australie Orientale");
-		//------------------------Amérique du Nord-----------------------------
+		//-------------------Amérique du Nord-------------------------
+		//-------------------Amérique du Sud--------------------------
 		
 
 		
 		//intégration des territoires dans les continents
 		continents[5].getList().add(territEurope);
+		//intégration des listes de territoires voisins par territoires 
+		egypte.getList().add(afriqueNord);
 		
 	}
 }
