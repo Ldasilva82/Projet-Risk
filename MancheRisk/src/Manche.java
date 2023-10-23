@@ -5,12 +5,12 @@ public class Manche{
     private ArrayList<Joueur> listjoueur;
     private Scanner scanner;
     //constructor 
-    public Manche(int nbJoueur){
-    	//lancer le jeu 
-        débuterManche(nbJoueur);
+    public Manche(){
+    	//lancer le jeu avec 5 joueur 
+        débuterManche(5);
     }
     //method 
-    public void débuterManche(int nbJoueur) {
+    private void débuterManche(int nbJoueur) {
     	//créer la liste de l'ordre de passage
     	ArrayList<Joueur> listjoueur = ArrayList<Joueur>();
     	//créer les joueurs 
@@ -23,7 +23,7 @@ public class Manche{
     	}
     	
     }
-    public ArrayList<> setOrdreJoueur(int nbJoueur){
+    private ArrayList<> setOrdreJoueur(int nbJoueur){
     	
     }
 }
