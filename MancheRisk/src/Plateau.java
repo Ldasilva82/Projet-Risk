@@ -112,9 +112,54 @@ public class Plateau{
 		continents[6].getList().add(australieOccidentale);
 		continents[6].getList().add(australieOrientale);
 
-		
-		//intégration des listes de territoires voisins par territoires 
-		egypte.getVoisins() = new Territoire[] {afriqueNord, afriqueOrientale, moyenOrient, europeSud}
-		
+		//Intégration des listes de territoires voisins par territoires
+		//-----------------------Afrique-----------------------------
+		egypte.getVoisins() = new Territoire[] {afriqueNord, afriqueOrientale, moyenOrient, europeSud};
+		afriqueNord.getVoisins() = new Territoire[] {egypte, afriqueOrientale, afriqueCentrale, bresil, europeOuest, europeSud};
+		afriqueOrientale.getVoisins() = new Territoire[] {egypte, afriqueNord, afriqueCentrale, afriqueSud, madagascar, moyenOrient};
+		afriqueCentrale.getVoisins() = new Territoire[] {afriqueSud, afriqueOrientale, afriqueNord};
+		afriqueSud.getVoisins() = new Territoire[] {afriqueCentrale, afriqueOrientale, madagascar};
+		madagascar.getVoisins() = new Territoire[] {afriqueOrientale, afriqueSud};
+		//------------------Amérique du Nord-------------------------
+		alaska.getVoisins() = new Territoire[] {territoireNordOuest, alberta, kamchatka};
+		territoireNordOuest.getVoisins() = new Territoire[] {alaska, alberta, ontario, groenland};
+		groenland.getVoisins() = new Territoire[] {territoireNordOuest, ontario, canada, islande};
+		alberta.getVoisins() = new Territoire[] {alaska, territoireNordOuest, ontario, euOuest};
+		ontario.getVoisins() = new Territoire[] {groenland, canada, euEst, euOuest, alberta, territoireNordOuest};
+		canada.getVoisins() = new Territoire[] {groenland, ontario, euEst};
+		euOuest.getVoisins() = new Territoire[] {alberta, ontario, euEst, ameriqueCentrale};
+		euEst.getVoisins() = new Territoire[] {euOuest, ontario, canada, ameriqueCentrale};
+		ameriqueCentrale.getVoisins() = new Territoire[] {euOuest, euEst, venezuela};
+		//-------------------Amérique du Sud-------------------------
+		venezuela.getVoisins() = new Territoire[] {bresil, perou, ameriqueCentrale};
+		bresil.getVoisins() = new Territoire[] {venezuela, perou, argentine, afriqueNord};
+		perou.getVoisins() = new Territoire[] {venezuela, bresil, argentine};
+		argentine.getVoisins() = new Territoire[] {perou, bresil};
+		//------------------------Asie-------------------------------
+		oural.getVoisins() = new Territoire[] {siberie, chine, afghanistan, russie};
+		siberie.getVoisins() = new Territoire[] {yakoutie, irkoutsk, mongolie, chine, oural};
+		yakoutie.getVoisins() = new Territoire[] {kamchatka, irkoutsk, siberie};
+		kamchatka.getVoisins() = new Territoire[] {yakoutie, irkoutsk, mongolie, japon, alaska};
+		irkoutsk.getVoisins() = new Territoire[] {yakoutie, kamchatka, mongolie, siberie};
+		mongolie.getVoisins() = new Territoire[] {irkoutsk, kamchatka, japon, chine, siberie};
+		japon.getVoisins() = new Territoire[] {kamchatka, mongolie};
+		afghanistan.getVoisins() = new Territoire[] {oural, chine, inde, moyenOrient, russie};
+		chine.getVoisins() = new Territoire[] {siberie, mongolie, asieSudEst, inde, afghanistan, oural};
+		moyenOrient.getVoisins() = new Territoire[] {afghanistan, inde, afriqueOrientale, egypte, europeSud, russie};
+		inde.getVoisins() = new Territoire[] {moyenOrient, afghanistan, chine, asieSudEst};
+		asieSudEst.getVoisins() = new Territoire[] {inde, chine, indonesie};
+		//------------------------Europe-----------------------------
+		islande.getVoisins() = new Territoire[] {scandinavie, gb, groenland};
+		gb.getVoisins() = new Territoire[] {islande, scandinavie, europeNord, europeOuest};
+		europeOuest.getVoisins() = new Territoire[] {europeSud, europeNord, gb, afriqueNord};
+		europeSud.getVoisins() = new Territoire[] {europeOuest, europeNord, russie, moyenOrient, egypte, afriqueNord};
+		europeNord.getVoisins() = new Territoire[] {gb, scandinavie, russie, europeSud, europeOuest};
+		scandinavie.getVoisins() = new Territoire[] {islande, gb, europeNord, russie};
+		russie.getVoisins() = new Territoire[] {scandinavie, europeNord, europeSud, moyenOrient, afghanistan, oural};
+		//------------------------Australie--------------------------
+		indonesie.getVoisins() = new Territoire[] {asieSudEst, nouvGuinee, australieOccidentale};
+		nouvGuinee.getVoisins() = new Territoire[] {indonesie, australieOrientale};
+		australieOccidentale.getVoisins() = new Territoire[] {indonesie, australieOrientale};
+		australieOrientale.getVoisins() = new Territoire[] {australieOccidentale, nouvGuinee};
 	}
 }
