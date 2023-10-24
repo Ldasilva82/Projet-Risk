@@ -1,6 +1,12 @@
 public class Plateau{
-	//attribute
+
+	//attributs
 	private Continent[] continents;
+	private Case[] plateau;
+	private largeur;
+	private hauteur;
+
+
 	//constructor
 	public Plateau(){
 		//Création des continents 
@@ -161,5 +167,229 @@ public class Plateau{
 		nouvGuinee.getVoisins() = new Territoire[] {indonesie, australieOrientale};
 		australieOccidentale.getVoisins() = new Territoire[] {indonesie, australieOrientale};
 		australieOrientale.getVoisins() = new Territoire[] {australieOccidentale, nouvGuinee};
-	}
+
+		//Initialiser le plateau
+		plateau = new Case[largeur][hauteur];
+
+        // Initialisation du plateau avec des cases vides
+        for (int x = 0; x < largeur; x++) {
+            for (int y = 0; y < hauteur; y++) {
+                plateau[x][y] = new Case(x, y);
+            }
+        }
+
+		// Affecter des cases à des territoires
+		//-----------------------Afrique-----------------------------
+        plateau[10][8].setTerritoire(egypte);
+        plateau[11][8].setTerritoire(egypte);
+
+        plateau[7][8].setTerritoire(afriqueNord);
+        plateau[8][8].setTerritoire(afriqueNord);
+        plateau[9][8].setTerritoire(afriqueNord);
+        plateau[7][9].setTerritoire(afriqueNord);
+        plateau[8][9].setTerritoire(afriqueNord);
+        plateau[9][9].setTerritoire(afriqueNord);
+        plateau[8][10].setTerritoire(afriqueNord);
+        plateau[9][10].setTerritoire(afriqueNord);
+
+        plateau[12][8].setTerritoire(afriqueOrientale);
+        plateau[10][9].setTerritoire(afriqueOrientale);
+        plateau[11][9].setTerritoire(afriqueOrientale);
+        plateau[12][9].setTerritoire(afriqueOrientale);
+        plateau[10][10].setTerritoire(afriqueOrientale);
+        plateau[11][10].setTerritoire(afriqueOrientale);
+        plateau[12][10].setTerritoire(afriqueOrientale);
+        plateau[10][11].setTerritoire(afriqueOrientale);
+        plateau[11][11].setTerritoire(afriqueOrientale);
+
+        plateau[8][11].setTerritoire(afriqueOrientale);
+        plateau[9][11].setTerritoire(afriqueCentrale);
+
+        plateau[9][12].setTerritoire(afriqueSud);
+        plateau[10][12].setTerritoire(afriqueSud);
+        plateau[11][12].setTerritoire(afriqueSud);
+
+        plateau[12][11].setTerritoire(madagascar);
+        plateau[12][12].setTerritoire(madagascar);
+
+        //------------------Amérique du Nord-------------------------
+        plateau[0][1].setTerritoire(alaska);
+        plateau[0][2].setTerritoire(alaska);
+        plateau[18][1].setTerritoire(alaska);
+
+        plateau[1][1].setTerritoire(territoireNordOuest);
+        plateau[2][1].setTerritoire(territoireNordOuest);
+        plateau[3][1].setTerritoire(territoireNordOuest);
+
+        plateau[4][1].setTerritoire(groenland);
+        plateau[5][1].setTerritoire(groenland);
+        plateau[4][2].setTerritoire(groenland);
+        plateau[5][2].setTerritoire(groenland);
+
+        plateau[1][2].setTerritoire(alberta);
+        plateau[1][3].setTerritoire(alberta);
+
+        plateau[2][2].setTerritoire(ontario);
+        plateau[3][2].setTerritoire(ontario);
+        plateau[2][3].setTerritoire(ontario);
+        plateau[3][3].setTerritoire(ontario);
+
+        plateau[4][3].setTerritoire(canada);
+
+        plateau[1][4].setTerritoire(euOuest);
+        plateau[2][4].setTerritoire(euOuest);
+
+        plateau[3][4].setTerritoire(euEst);
+        plateau[4][4].setTerritoire(euEst);
+        plateau[3][5].setTerritoire(euEst);
+        plateau[4][5].setTerritoire(euEst);
+
+        plateau[2][5].setTerritoire(ameriqueCentrale);
+        plateau[2][6].setTerritoire(ameriqueCentrale);
+        plateau[2][7].setTerritoire(ameriqueCentrale);
+
+        //-------------------Amérique du Sud-------------------------
+        plateau[2][8].setTerritoire(venezuela);
+        plateau[3][8].setTerritoire(venezuela);
+
+        plateau[3][9].setTerritoire(bresil);
+        plateau[4][9].setTerritoire(bresil);
+        plateau[5][9].setTerritoire(bresil);
+        plateau[6][9].setTerritoire(bresil);
+        plateau[3][10].setTerritoire(bresil);
+        plateau[4][10].setTerritoire(bresil);
+        plateau[5][10].setTerritoire(bresil);
+        plateau[5][11].setTerritoire(bresil);
+
+        plateau[2][9].setTerritoire(perou);
+
+        plateau[2][10].setTerritoire(argentine);
+        plateau[2][11].setTerritoire(argentine);
+        plateau[3][11].setTerritoire(argentine);
+        plateau[4][11].setTerritoire(argentine);
+        plateau[3][12].setTerritoire(argentine);
+        plateau[4][12].setTerritoire(argentine);
+
+        //------------------------Asie-------------------------------
+        plateau[13][2].setTerritoire(oural);
+        plateau[13][3].setTerritoire(oural);
+        plateau[13][4].setTerritoire(oural);
+        plateau[13][5].setTerritoire(oural);
+
+        plateau[14][1].setTerritoire(siberie);
+        plateau[14][2].setTerritoire(siberie);
+        plateau[14][3].setTerritoire(siberie);
+        plateau[14][4].setTerritoire(siberie);
+
+        plateau[15][1].setTerritoire(yakoutie);
+
+        plateau[16][1].setTerritoire(kamchatka);
+        plateau[17][1].setTerritoire(kamchatka);
+        plateau[16][2].setTerritoire(kamchatka);
+
+        plateau[15][2].setTerritoire(irkoutsk);
+
+        plateau[15][3].setTerritoire(mongolie);
+        plateau[16][3].setTerritoire(mongolie);
+        plateau[15][4].setTerritoire(mongolie);
+        plateau[16][4].setTerritoire(mongolie);
+
+        plateau[17][2].setTerritoire(japon);
+        plateau[17][3].setTerritoire(japon);
+
+        plateau[12][6].setTerritoire(afghanistan);
+        plateau[13][6].setTerritoire(afghanistan);
+
+        plateau[14][5].setTerritoire(chine);
+        plateau[15][5].setTerritoire(chine);
+        plateau[16][5].setTerritoire(chine);
+        plateau[14][6].setTerritoire(chine);
+        plateau[15][6].setTerritoire(chine);
+        plateau[16][6].setTerritoire(chine);
+        plateau[15][7].setTerritoire(chine);
+
+        plateau[11][7].setTerritoire(moyenOrient);
+        plateau[12][7].setTerritoire(moyenOrient);
+
+        plateau[13][7].setTerritoire(inde);
+        plateau[14][7].setTerritoire(inde);
+        plateau[14][8].setTerritoire(inde);
+        plateau[14][9].setTerritoire(inde);
+
+        plateau[15][8].setTerritoire(asieSudEst);
+        plateau[15][9].setTerritoire(asieSudEst);
+
+		//------------------------Europe-----------------------------
+        plateau[6][2].setTerritoire(islande);
+        plateau[7][2].setTerritoire(islande);
+
+        plateau[6][3].setTerritoire(gb);
+        plateau[7][3].setTerritoire(gb);
+        plateau[8][3].setTerritoire(gb);
+
+        plateau[7][4].setTerritoire(europeOuest);
+        plateau[7][5].setTerritoire(europeOuest);
+        plateau[8][5].setTerritoire(europeOuest);
+        plateau[7][6].setTerritoire(europeOuest);
+        plateau[8][6].setTerritoire(europeOuest);
+        plateau[7][7].setTerritoire(europeOuest);
+        plateau[8][7].setTerritoire(europeOuest);
+
+        plateau[9][6].setTerritoire(europeSud);
+        plateau[10][6].setTerritoire(europeSud);
+        plateau[9][7].setTerritoire(europeSud);
+        plateau[10][7].setTerritoire(europeSud);
+
+        plateau[8][4].setTerritoire(europeNord);
+        plateau[9][4].setTerritoire(europeNord);
+        plateau[10][4].setTerritoire(europeNord);
+        plateau[9][5].setTerritoire(europeNord);
+        plateau[10][5].setTerritoire(europeNord);
+
+        plateau[8][2].setTerritoire(scandinavie);
+        plateau[9][2].setTerritoire(scandinavie);
+        plateau[10][2].setTerritoire(scandinavie);
+        plateau[9][3].setTerritoire(scandinavie);
+        plateau[10][3].setTerritoire(scandinavie);
+
+        plateau[11][2].setTerritoire(russie);
+        plateau[12][2].setTerritoire(russie);
+        plateau[11][3].setTerritoire(russie);
+        plateau[12][3].setTerritoire(russie);
+        plateau[11][4].setTerritoire(russie);
+        plateau[12][4].setTerritoire(russie);
+        plateau[11][5].setTerritoire(russie);
+        plateau[12][5].setTerritoire(russie);
+        plateau[11][6].setTerritoire(russie);
+
+        //------------------------Australie--------------------------
+        plateau[16][9].setTerritoire(indonesie);
+
+        plateau[17][9].setTerritoire(nouvGuinee);
+
+        plateau[16][10].setTerritoire(australieOccidentale);
+        plateau[16][11].setTerritoire(australieOccidentale);
+
+        plateau[17][10].setTerritoire(australieOrientale);
+        plateau[17][11].setTerritoire(australieOrientale);
+
+
+    //Méthodes
+	public Continent[] getContinents() {
+        return continents;
+    }
+
+    public void setContinents(Continent[] continents) {
+        this.continents = continents;
+    }
+
+    public Case[][] getPlateau() {
+        return plateau;
+    }
+
+    public void setPlateau(Case[][] plateau) {
+        this.plateau = plateau;
+    }
+
+    }
 }
