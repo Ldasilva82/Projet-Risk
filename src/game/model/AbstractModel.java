@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package game.model;
 
 import java.util.ArrayList;
@@ -12,7 +8,7 @@ import game.vue.observer.Observateur;
 
 /**
  *
- * @author david
+ * @author Alex, Lucas, Pauline, Ravaka, Yaning
  */
 public abstract class AbstractModel implements Observable {
     private ArrayList<Observateur> observateurs;
@@ -28,6 +24,9 @@ public abstract class AbstractModel implements Observable {
     public abstract void setTypeCase(int x, int y,TypeCase tc);
     //public abstract Joueur getAnimalPlusFort(int x, int y);
     public abstract boolean partieTerminer();
+    public abstract void selectTer(int x, int y);
+	public abstract int getLargeur();
+	public abstract int getHauteur();
 
     @Override
     public void demandeMiseAjourVue(){
@@ -47,12 +46,6 @@ public abstract class AbstractModel implements Observable {
     }
 
 
-	public abstract void selectTer(int x, int y);
-
-
-	public abstract int getLargeur();
-
-
-	public abstract int getHauteur();
+	
     
 }
