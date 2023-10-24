@@ -26,7 +26,7 @@ public class CarteManagement implements Serializable {
         //Types of cards
         typesArray = new String[]{"Infanteries", "Cavaleries", "Artilleries"};
 
-        deck = new ArrayList<Card>();
+        deck = new ArrayList<Carte>();
 
         for (i = 0; i < territoire.size(); i++) {
             // Add new cards to deck
