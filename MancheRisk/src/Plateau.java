@@ -346,19 +346,19 @@ public class Plateau{
 	}
 
     //Méthodes
+	public int getLargeur() {
+		return this.largeur;
+	}
+	
+	public int getHauteur() {
+		return this.hauteur;
+	}
+	
 	public Continent[] getContinents() {
         return continents;
     }
 
-    public void setContinents(Continent[] continents) {
-        this.continents = continents;
-    }
-
     public Territoire[][] getPlateau() {
         return plateau;
-    }
-
-    public void setPlateau(Territoire[][] plateau) {
-        this.plateau = plateau;
     }
 }
