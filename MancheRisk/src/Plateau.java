@@ -136,15 +136,18 @@ public class Plateau{
 		//Initialiser le plateau
 		Territoire[][] plateau = new Territoire[largeur][hauteur];
 		
-        // Initialisation du plateau avec les territoires  : mer
-        for (int x = 0; x < largeur; x++) {
-            for (int y = 0; y < hauteur; y++) {
-            	if(y == 0 || y == 13 
-            			|| (y > 2 && (x == 0) ||(y == 0 || y>1) && (x == 18))
-            			|| (y == 1 || y > 5)&&(x == 1))
-                plateau[x][y] = TypeTerritoire.MER;
-            }
-        }
+        // Initialisation du plateau avec les différents types de territoires 
+		
+//        for (int x = 0; x < largeur; x++) {
+//            for (int y = 0; y < hauteur; y++) {
+//            	if(y == 0 || y == 13 
+//            			|| (y > 2 && (x == 0) ||(y == 0 || y>1) && (x == 18))
+//            			|| (y == 1 || y > 5)&&(x == 1)
+//            			) {
+//            		//plateau[x][y] = TypeTerritoire.MER;
+//            	}
+//            }
+//        }
 
 		// Affecter des cases à des territoires
 		//-----------------------Afrique-----------------------------
