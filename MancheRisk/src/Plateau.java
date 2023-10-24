@@ -71,17 +71,17 @@ public class Plateau{
 		//Intégration des territoires dans les continents
 
 		//-----------------------Afrique-----------------------------
-		continents[1].getList() = new Territoire[] {egypte, afriqueNord, afriqueOrientale, afriqueCentrale, afriqueSud, madagascar};
+		continents[1].setList(new Territoire[] {egypte, afriqueNord, afriqueOrientale, afriqueCentrale, afriqueSud, madagascar});
 		//------------------Amérique du Nord-------------------------
-		continents[2].getList() = new Territoire[] {alaska, territoireNordOuest, groenland, alberta, ontario, canada, EUOuest, EUEst, ameriqueCentrale};
+		continents[2].setList(new Territoire[] {alaska, territoireNordOuest, groenland, alberta, ontario, canada, euOuest, euEst, ameriqueCentrale});
 		//-------------------Amérique du Sud-------------------------
-		continents[3].getList() = new Territoire[] {venezuela, bresil, perou, argentine};
+		continents[3].setList( new Territoire[] {venezuela, bresil, perou, argentine});
 		//-------------------------Asie------------------------------
-		continents[4].getList() = new Territoire[] {oural,siberie,yakoutie,kamchatka,irkoutsk,mongolie,japon,afghanistan,chine,moyenOrient,inde,asieSudEst};
+		continents[4].setList(new Territoire[] {oural,siberie,yakoutie,kamchatka,irkoutsk,mongolie,japon,afghanistan,chine,moyenOrient,inde,asieSudEst});
 		//------------------------Europe-----------------------------
-		continents[5].getList() = new Territoire[] {islande,gb,europeOuest,europeSud,europeNord,scandinavie,russie};
+		continents[5].setList() = new Territoire[] {islande,gb,europeOuest,europeSud,europeNord,scandinavie,russie};
 		//-----------------------Australie---------------------------
-		continents[6].getList() = new Territoire[] {indonesie,nouvGuinee,australieOccidentale,australieOrientale};
+		continents[6].setList() = new Territoire[] {indonesie,nouvGuinee,australieOccidentale,australieOrientale};
 
 		continents[1].getList().add(egypte);
 		continents[1].getList().add(afriqueNord);
@@ -133,7 +133,7 @@ public class Plateau{
 
 		//Intégration des listes de territoires voisins par territoires
 		//-----------------------Afrique-----------------------------
-		egypte.getVoisins() = new Territoire[] {afriqueNord, afriqueOrientale, moyenOrient, europeSud};
+		egypte.getVoisins().{afriqueNord, afriqueOrientale, moyenOrient, europeSud};
 		afriqueNord.getVoisins() = new Territoire[] {egypte, afriqueOrientale, afriqueCentrale, bresil, europeOuest, europeSud};
 		afriqueOrientale.getVoisins() = new Territoire[] {egypte, afriqueNord, afriqueCentrale, afriqueSud, madagascar, moyenOrient};
 		afriqueCentrale.getVoisins() = new Territoire[] {afriqueSud, afriqueOrientale, afriqueNord};
@@ -187,7 +187,10 @@ public class Plateau{
         // Initialisation du plateau avec des cases vides
         for (int x = 0; x < largeur; x++) {
             for (int y = 0; y < hauteur; y++) {
-                plateau = new Territoire[x][y];
+            	if(y == 0 || y == 13 
+            			|| (y > 2 && (x == 0) ||(y == 0 || y>1) && (x == 18))
+            			|| (y == 1 || y > 5)&&(x == 1))
+                plateau[x][y] = TypeTerritoire.conquerable;
             }
         }
 
@@ -396,13 +399,11 @@ public class Plateau{
         this.continents = continents;
     }
 
-    public Case[][] getPlateau() {
+    public Territoire[][] getPlateau() {
         return plateau;
     }
 
-    public void setPlateau(Case[][] plateau) {
+    public void setPlateau(Territoire[][] plateau) {
         this.plateau = plateau;
-    }
-
     }
 }

@@ -4,7 +4,7 @@ import java.util.List;
 public class Continent {
 	private String nomContinent;
 	private int point;
-	private ArrayList<Territoire> territoires;
+	private Territoire[] territoires;
 
 	public Continent(String nomContinent, int point){
 		this.nomContinent = nomContinent;
@@ -14,7 +14,11 @@ public class Continent {
 	public String getnomContinent(){
 		return nomContinent;
 	}
-	public ArrayList<Territoire> getList(){
+	public Territoire[] getList(){
 		return this.territoires;
 	}
+	public void setList(Territoire[] listTerrit) {
+		this.territoires = listTerrit;
+	}
+	
 }
