@@ -11,6 +11,9 @@ public class Territoire {
         //voir si possible de ne pas mettre à null
         this.joueurProprietaire = null;
     }
+    public void setVoisins(Territoire[] listTerrit) {
+    	this.territVoisins = listTerrit; 
+    }
     public Territoire[] getVoisins(){
         return this.territVoisins;
     }
