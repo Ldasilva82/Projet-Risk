@@ -11,7 +11,10 @@ public class Territoire {
         //voir si possible de ne pas mettre à null
         this.joueurProprietaire = null;
     }
-    public Territoires[] getVoisins(){
+    public void setVoisins(Territoire[] listTerrit) {
+    	this.territVoisins = listTerrit; 
+    }
+    public Territoire[] getVoisins(){
         return this.territVoisins;
     }
     public String getNomTerritoire(){
