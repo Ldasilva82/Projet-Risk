@@ -1,0 +1,12 @@
+diff a/src/game/model/Plateau.java b/src/game/model/Plateau.java	(rejected hunks)
+@@ -377,8 +377,8 @@
+         plateau[17][10] = australieOrientale;
+         plateau[17][11] = australieOrientale;
+         
+-      /*
+-       * /Création des continents 
++      
++       //Création des continents 
+       	continents = new Continent[6];
+       	continents[1] = new Continent("Afrique", 3);
+       	continents[2] = new Continent("Amérique du Nord", 5);

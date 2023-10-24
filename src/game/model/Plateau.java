@@ -377,8 +377,13 @@ public class Plateau extends AbstractModel {
         plateau[17][10] = australieOrientale;
         plateau[17][11] = australieOrientale;
         
+<<<<<<< HEAD
       
        //Création des continents 
+=======
+      /*
+       * /Création des continents - Erreur si pas de commentaire
+>>>>>>> develop
       	continents = new Continent[6];
       	continents[1] = new Continent("Afrique", 3);
       	continents[2] = new Continent("Amérique du Nord", 5);
