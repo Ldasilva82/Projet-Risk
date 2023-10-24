@@ -2,9 +2,9 @@ public class Plateau{
 
 	//attributs
 	private Continent[] continents;
-	private Case[] plateau;
-	private largeur;
-	private hauteur;
+	private Territoire[][] plateau;
+	private int largeur;
+	private int hauteur;
 
 
 	//constructor
@@ -13,7 +13,7 @@ public class Plateau{
 		continents = new Continent[6];
 		continents[1] = new Continent("Afrique", 3);
 		continents[2] = new Continent("Amérique du Nord", 5);
-		continents[3] = new Continent("Amérique du Sud" 2);
+		continents[3] = new Continent("Amérique du Sud", 2);
 		continents[4] = new Continent("Asie", 7);
 		continents[5] = new Continent("Europe", 5);
 		continents[6] = new Continent("Australie", 2);
@@ -71,78 +71,78 @@ public class Plateau{
 		//Intégration des territoires dans les continents
 
 		//-----------------------Afrique-----------------------------
-		continents[1].getList() = new Territoire[] {egypte, afriqueNord, afriqueOrientale, afriqueCentrale, afriqueSud, madagascar};
+		continents[1].setList(new Territoire[] {egypte, afriqueNord, afriqueOrientale, afriqueCentrale, afriqueSud, madagascar});
 		//------------------Amérique du Nord-------------------------
-		continents[2].getList() = new Territoire[] {alaska, territoireNordOuest, groenland, alberta, ontario, canada, EUOuest, EUEst, ameriqueCentrale};
+		continents[2].setList(new Territoire[] {alaska, territoireNordOuest, groenland, alberta, ontario, canada, euOuest, euEst, ameriqueCentrale});
 		//-------------------Amérique du Sud-------------------------
-		continents[3].getList() = new Territoire[] {venezuela, bresil, perou, argentine};
+		continents[3].setList( new Territoire[] {venezuela, bresil, perou, argentine});
 		//-------------------------Asie------------------------------
-		continents[4].getList() = new Territoire[] {oural,siberie,yakoutie,kamchatka,irkoutsk,mongolie,japon,afghanistan,chine,moyenOrient,inde,asieSudEst};
+		continents[4].setList(new Territoire[] {oural,siberie,yakoutie,kamchatka,irkoutsk,mongolie,japon,afghanistan,chine,moyenOrient,inde,asieSudEst});
 		//------------------------Europe-----------------------------
-		continents[5].getList() = new Territoire[] {islande,gb,europeOuest,europeSud,europeNord,scandinavie,russie};
+		continents[5].setList(new Territoire[] {islande,gb,europeOuest,europeSud,europeNord,scandinavie,russie});
 		//-----------------------Australie---------------------------
-		continents[6].getList() = new Territoire[] {indonesie,nouvGuinee,australieOccidentale,australieOrientale};
+		continents[6].setList(new Territoire[] {indonesie,nouvGuinee,australieOccidentale,australieOrientale});
 
-		continents[1].getList().add(egypte);
-		continents[1].getlist().add(afriqueNord);
-		continents[1].getlist().add(afriqueOrientale);
-		continents[1].getlist().add(afriqueCentrale);
-		continents[1].getlist().add(afriqueSud);
-		continents[1].getlist().add(madagascar);
-		//------------------Amérique du Nord-------------------------
-		continents[2].getList().add(alaska);
-		continents[2].getList().add(territoireNordOuest);
-		continents[2].getList().add(groenland);
-		continents[2].getList().add(alberta);
-		continents[2].getList().add(ontario);
-		continents[2].getList().add(canada);
-		continents[2].getList().add(euOuest);
-		continents[2].getList().add(euEst);
-		continents[2].getList().add(ameriqueCentrale);
-		//-------------------Amérique du Sud-------------------------
-		continents[3].getList().add(venezuela);
-		continents[3].getList().add(bresil);
-		continents[3].getList().add(perou);
-		continents[3].getList().add(argentine);
-		//------------------------Asie-------------------------------
-		continents[4].getList().add(oural);
-		continents[4].getList().add(siberie);
-		continents[4].getList().add(yakoutie);
-		continents[4].getList().add(kamchatka);
-		continents[4].getList().add(irkoutsk);
-		continents[4].getList().add(mongolie);
-		continents[4].getList().add(japon);
-		continents[4].getList().add(afghanistan);
-		continents[4].getList().add(chine);
-		continents[4].getList().add(moyenOrient);
-		continents[4].getList().add(inde);
-		continents[4].getList().add(asieSudEst);
-		//------------------------Europe-----------------------------
-		continents[5].getList().add(islande);
-		continents[5].getList().add(gb);
-		continents[5].getList().add(europeOuest);
-		continents[5].getList().add(europeSud);
-		continents[5].getList().add(europeNord);
-		continents[5].getList().add(scandinavie);
-		continents[5].getList().add(russie);
-		//------------------------Australie--------------------------
-		continents[6].getList().add(indonesie);
-		continents[6].getList().add(nouvGuinee);
-		continents[6].getList().add(australieOccidentale);
-		continents[6].getList().add(australieOrientale);
+//		continents[1].getList().add(egypte);
+//		continents[1].getList().add(afriqueNord);
+//		continents[1].getList().add(afriqueOrientale);
+//		continents[1].getList().add(afriqueCentrale);
+//		continents[1].getList().add(afriqueSud);
+//		continents[1].getList().add(madagascar);
+//		//------------------Amérique du Nord-------------------------
+//		continents[2].getList().add(alaska);
+//		continents[2].getList().add(territoireNordOuest);
+//		continents[2].getList().add(groenland);
+//		continents[2].getList().add(alberta);
+//		continents[2].getList().add(ontario);
+//		continents[2].getList().add(canada);
+//		continents[2].getList().add(euOuest);
+//		continents[2].getList().add(euEst);
+//		continents[2].getList().add(ameriqueCentrale);
+//		//-------------------Amérique du Sud-------------------------
+//		continents[3].getList().add(venezuela);
+//		continents[3].getList().add(bresil);
+//		continents[3].getList().add(perou);
+//		continents[3].getList().add(argentine);
+//		//------------------------Asie-------------------------------
+//		continents[4].getList().add(oural);
+//		continents[4].getList().add(siberie);
+//		continents[4].getList().add(yakoutie);
+//		continents[4].getList().add(kamchatka);
+//		continents[4].getList().add(irkoutsk);
+//		continents[4].getList().add(mongolie);
+//		continents[4].getList().add(japon);
+//		continents[4].getList().add(afghanistan);
+//		continents[4].getList().add(chine);
+//		continents[4].getList().add(moyenOrient);
+//		continents[4].getList().add(inde);
+//		continents[4].getList().add(asieSudEst);
+//		//------------------------Europe-----------------------------
+//		continents[5].getList().add(islande);
+//		continents[5].getList().add(gb);
+//		continents[5].getList().add(europeOuest);
+//		continents[5].getList().add(europeSud);
+//		continents[5].getList().add(europeNord);
+//		continents[5].getList().add(scandinavie);
+//		continents[5].getList().add(russie);
+//		//------------------------Australie--------------------------
+//		continents[6].getList().add(indonesie);
+//		continents[6].getList().add(nouvGuinee);
+//		continents[6].getList().add(australieOccidentale);
+//		continents[6].getList().add(australieOrientale);
 
 		//Intégration des listes de territoires voisins par territoires
 		//-----------------------Afrique-----------------------------
-		egypte.getVoisins() = new Territoire[] {afriqueNord, afriqueOrientale, moyenOrient, europeSud};
-		afriqueNord.getVoisins() = new Territoire[] {egypte, afriqueOrientale, afriqueCentrale, bresil, europeOuest, europeSud};
-		afriqueOrientale.getVoisins() = new Territoire[] {egypte, afriqueNord, afriqueCentrale, afriqueSud, madagascar, moyenOrient};
-		afriqueCentrale.getVoisins() = new Territoire[] {afriqueSud, afriqueOrientale, afriqueNord};
-		afriqueSud.getVoisins() = new Territoire[] {afriqueCentrale, afriqueOrientale, madagascar};
-		madagascar.getVoisins() = new Territoire[] {afriqueOrientale, afriqueSud};
+		egypte.setVoisins(new Territoire[] {afriqueNord, afriqueOrientale, moyenOrient, europeSud});
+		afriqueNord.setVoisins(new Territoire[] {egypte, afriqueOrientale, afriqueCentrale, bresil, europeOuest, europeSud});
+		afriqueOrientale.setVoisins(new Territoire[] {egypte, afriqueNord, afriqueCentrale, afriqueSud, madagascar, moyenOrient});
+		afriqueCentrale.setVoisins(new Territoire[] {afriqueSud, afriqueOrientale, afriqueNord});
+		afriqueSud.setVoisins(new Territoire[] {afriqueCentrale, afriqueOrientale, madagascar});
+		madagascar.setVoisins() = new Territoire[] {afriqueOrientale, afriqueSud};
 		//------------------Amérique du Nord-------------------------
-		alaska.getVoisins() = new Territoire[] {territoireNordOuest, alberta, kamchatka};
-		territoireNordOuest.getVoisins() = new Territoire[] {alaska, alberta, ontario, groenland};
-		groenland.getVoisins() = new Territoire[] {territoireNordOuest, ontario, canada, islande};
+		alaska.setVoisins() = new Territoire[] {territoireNordOuest, alberta, kamchatka};
+		territoireNordOuest.setVoisins() = new Territoire[] {alaska, alberta, ontario, groenland};
+		groenland.setVoisins() = new Territoire[] {territoireNordOuest, ontario, canada, islande};
 		alberta.getVoisins() = new Territoire[] {alaska, territoireNordOuest, ontario, euOuest};
 		ontario.getVoisins() = new Territoire[] {groenland, canada, euEst, euOuest, alberta, territoireNordOuest};
 		canada.getVoisins() = new Territoire[] {groenland, ontario, euEst};
@@ -182,12 +182,15 @@ public class Plateau{
 		australieOrientale.getVoisins() = new Territoire[] {australieOccidentale, nouvGuinee};
 
 		//Initialiser le plateau
-		plateau = new Case[largeur][hauteur];
+		Territoire[][] plateau = new Territoire[largeur][hauteur];
 
         // Initialisation du plateau avec des cases vides
         for (int x = 0; x < largeur; x++) {
             for (int y = 0; y < hauteur; y++) {
-                plateau[x][y] = new Case(x, y);
+            	if(y == 0 || y == 13 
+            			|| (y > 2 && (x == 0) ||(y == 0 || y>1) && (x == 18))
+            			|| (y == 1 || y > 5)&&(x == 1))
+                plateau[x][y] = TypeTerritoire.conquerable;
             }
         }
 
@@ -396,13 +399,11 @@ public class Plateau{
         this.continents = continents;
     }
 
-    public Case[][] getPlateau() {
+    public Territoire[][] getPlateau() {
         return plateau;
     }
 
-    public void setPlateau(Case[][] plateau) {
+    public void setPlateau(Territoire[][] plateau) {
         this.plateau = plateau;
-    }
-
     }
 }
