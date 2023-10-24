@@ -79,9 +79,9 @@ public class Plateau{
 		//-------------------------Asie------------------------------
 		continents[4].setList(new Territoire[] {oural,siberie,yakoutie,kamchatka,irkoutsk,mongolie,japon,afghanistan,chine,moyenOrient,inde,asieSudEst});
 		//------------------------Europe-----------------------------
-		continents[5].setList() = new Territoire[] {islande,gb,europeOuest,europeSud,europeNord,scandinavie,russie};
+		continents[5].setList(new Territoire[] {islande,gb,europeOuest,europeSud,europeNord,scandinavie,russie});
 		//-----------------------Australie---------------------------
-		continents[6].setList() = new Territoire[] {indonesie,nouvGuinee,australieOccidentale,australieOrientale};
+		continents[6].setList(new Territoire[] {indonesie,nouvGuinee,australieOccidentale,australieOrientale});
 
 		continents[1].getList().add(egypte);
 		continents[1].getList().add(afriqueNord);
