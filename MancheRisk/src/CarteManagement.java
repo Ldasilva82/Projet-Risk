@@ -4,72 +4,76 @@ import java.util.Collections;
 
 public class CarteManagement implements Serializable {
 
-    private int i;
-
-    private String input;
-    private String name;
-
-    private String[] typesArray;
-
-    public ArrayList<Carte> deck;
-
-    private Carte drawCard;
-
-   /**
-    *  Creates all cards, one for each territory. Each card has either
-     * a type of Infantry, Cavalry, or Artillery.
-    */
-    public CarteManagement(ArrayList<Territoire> territoire) {
-
-        Collections.shuffle(territoire);
-
-        //Types of cards
-        typesArray = new String[]{"Infanteries", "Cavaleries", "Artilleries"};
-
-        deck = new ArrayList<Carte>();
-
-        for (i = 0; i < territoire.size(); i++) {
-            // Add new cards to deck
-            deck.add(new Carte(typesArray[i % 3], territoire.get(i)));
-            //System.out.println("Added new card to deck: " + deck.get(i).getName());
-        }
-        Collections.shuffle(deck);
-    }
-
-    /**
-     * Public default constructor to access other methods.
-     */
+    
+    private String[] types;
+    public ArrayList<String> cartes;
+    private String retirerCarte;
+    
+    
+    
     public CarteManagement(){
-        deck = new ArrayList<>();
+        cartes = new ArrayList<>();
+    }
+
+
+
+/*composer carte */
+    public void getCarteManagement() {
+        String[] types = new String[]{"Infanterie", "Cavalerie", "Artillerie"};
+	    String[] infanteries = new String[]{"Islande", "Kamchatka", "Mongolie", "Chine", "Moyen-Orient", "Asie du Sud-Est", "Nouvelle Guinée", "Egypte", "Afrique Orientale", "Afrique Centrale", "Alaska", "Venezuela", "Pérou", "Argentine"};
+	    String[] artilleries = new String[]{"Grande-Bretagne", "Europe de l'Ouest", "Europe du Sud", "Europe du Nord", "Japon", "Indonésie", "Australie Occidentale", "Australie Orientale", "Afrique du Sud", "Territoires du Nord-Ouest", "Etats-Unis de l'Ouest", "Etats-Unis de l'Est", "Amerique Centrale", "Brésil"};
+	    String[] cavaleries = new String[]{"Scandinavie", "Russie", "Oural", "Sibérie", "Yakoutie", "Irkoutsk", "Afghanistan", "Inde", "Afrique du Nord", "Madagascar", "Groenland", "Alberta", "Ontario", "Canada de l'Est"};
+
+	    for (int i = 0; i < types.length; i++) {
+	        String type = types[i];
+	        if (type.equals("Infanterie")) {
+	            for (int j = 0; j < infanteries.length; j++) {
+	                cartes.add(type + " " + infanteries[j]);
+	            }
+	        } else if (type.equals("Artillerie")) {
+	            for (int j = 0; j < artilleries.length; j++) {
+	                cartes.add(type + " " + artilleries[j]);
+	            }
+	        } else if (type.equals("Cavalerie")) {
+	            for (int j = 0; j < cavaleries.length; j++) {
+	                cartes.add(type + " " + cavaleries[j]);
+	            }
+	        }
+	    }
+
+	    // Add two Jokers to the cartes list
+	    cartes.add("Joker");
+	    cartes.add("Joker");
+	    Collections.shuffle(cartes);
+
+	    // Print the elements in the list
+	    for (String carte : cartes) {
+	    	
+	        System.out.println(carte);
+	    }
     }
 
     /**
-     * Removes a card from the deck and return it
-     * @return card object
+     * Removes a card from the cartes and return it
      */
-    public Carte draw() {
+    public String retirer() {
 
-        drawCard = deck.get(0);
-        deck.remove(0);
+        retirerCarte = cartes.get(0);
+        cartes.remove(0);
 
-        return drawCard;
+        return retirerCarte;
     }
 
-   /**
-    * Add a card to the deck
-    * @param card name of the card which is to be added to deck
-    */
-    public void add(Carte card) {
 
-        deck.add(card);
+    public void add(String card) {
+
+        cartes.add(card);
     }
 
-   /**
-    * Shuffle the deck of cards
-    */
+  /*mélanger les cartes aléatoirement */
     public void shuffle() {
 
-        Collections.shuffle(deck);
+        Collections.shuffle(cartes);
     }
     
 }
