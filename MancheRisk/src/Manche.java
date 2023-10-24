@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-//un commenttttttttttttttttttttttttttttttttt	ire
+//un commentttttttttttttttttttttttttttttttaire
 
 public class Manche{
     	//attribute 
@@ -28,7 +28,7 @@ public class Manche{
     	}
     	
     }
-    private ArrayList<> setOrdreJoueur(int nbJoueur){
-    	
+    private ArrayList<Joueur> setOrdreJoueur(int nbJoueur){
+    	return listjoueur;
     }
 }

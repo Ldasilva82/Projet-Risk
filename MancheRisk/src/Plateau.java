@@ -3,8 +3,8 @@ public class Plateau{
 	//attributs
 	private Continent[] continents;
 	private Case[] plateau;
-	private largeur;
-	private hauteur;
+	private int largeur;
+	private int hauteur;
 
 
 	//constructor
@@ -13,7 +13,7 @@ public class Plateau{
 		continents = new Continent[6];
 		continents[1] = new Continent("Afrique", 3);
 		continents[2] = new Continent("Amérique du Nord", 5);
-		continents[3] = new Continent("Amérique du Sud" 2);
+		continents[3] = new Continent("Amérique du Sud", 2);
 		continents[4] = new Continent("Asie", 7);
 		continents[5] = new Continent("Europe", 5);
 		continents[6] = new Continent("Australie", 2);
@@ -84,11 +84,11 @@ public class Plateau{
 		continents[6].getList() = new Territoire[] {indonesie,nouvGuinee,australieOccidentale,australieOrientale};
 
 		continents[1].getList().add(egypte);
-		continents[1].getlist().add(afriqueNord);
-		continents[1].getlist().add(afriqueOrientale);
-		continents[1].getlist().add(afriqueCentrale);
-		continents[1].getlist().add(afriqueSud);
-		continents[1].getlist().add(madagascar);
+		continents[1].getList().add(afriqueNord);
+		continents[1].getList().add(afriqueOrientale);
+		continents[1].getList().add(afriqueCentrale);
+		continents[1].getList().add(afriqueSud);
+		continents[1].getList().add(madagascar);
 		//------------------Amérique du Nord-------------------------
 		continents[2].getList().add(alaska);
 		continents[2].getList().add(territoireNordOuest);
@@ -182,12 +182,12 @@ public class Plateau{
 		australieOrientale.getVoisins() = new Territoire[] {australieOccidentale, nouvGuinee};
 
 		//Initialiser le plateau
-		plateau = new Case[largeur][hauteur];
+		Territoire[][] plateau = new Territoire[largeur][hauteur];
 
         // Initialisation du plateau avec des cases vides
         for (int x = 0; x < largeur; x++) {
             for (int y = 0; y < hauteur; y++) {
-                plateau[x][y] = new Case(x, y);
+                plateau = new Territoire[x][y];
             }
         }
 
