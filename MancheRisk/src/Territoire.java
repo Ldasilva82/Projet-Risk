@@ -2,7 +2,8 @@ public class Territoire {
     private String nomTerritoire;
     private Territoire[] territVoisins;
     private int nbRegiment;
-    private Joueur joueurProprietaire; 
+    private Joueur joueurProprietaire;
+    private TypeTerritoire typeTerritoire;
 
 
     public Territoire(String nomTerrit){
@@ -20,4 +21,13 @@ public class Territoire {
     public String getNomTerritoire(){
         return this.nomTerritoire;
     }
+    
+    public TypeTerritoire getTypeTerritoire() {
+    	return this.typeTerritoire;
+    }
+    
+    public TypeTerritoire setTypeTerritoire(TypeTerritoire type) {
+    	return this.typeTerritoire = type;
+    }
+    
 }
