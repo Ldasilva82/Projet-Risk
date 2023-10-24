@@ -135,9 +135,9 @@ public class Plateau{
 		//-----------------------Afrique-----------------------------
 		egypte.setVoisins(new Territoire[] {afriqueNord, afriqueOrientale, moyenOrient, europeSud});
 		afriqueNord.setVoisins(new Territoire[] {egypte, afriqueOrientale, afriqueCentrale, bresil, europeOuest, europeSud});
-		afriqueOrientale.setVoisins() = new Territoire[] {egypte, afriqueNord, afriqueCentrale, afriqueSud, madagascar, moyenOrient};
-		afriqueCentrale.setVoisins() = new Territoire[] {afriqueSud, afriqueOrientale, afriqueNord};
-		afriqueSud.setVoisins() = new Territoire[] {afriqueCentrale, afriqueOrientale, madagascar};
+		afriqueOrientale.setVoisins(new Territoire[] {egypte, afriqueNord, afriqueCentrale, afriqueSud, madagascar, moyenOrient});
+		afriqueCentrale.setVoisins(new Territoire[] {afriqueSud, afriqueOrientale, afriqueNord});
+		afriqueSud.setVoisins(new Territoire[] {afriqueCentrale, afriqueOrientale, madagascar});
 		madagascar.setVoisins() = new Territoire[] {afriqueOrientale, afriqueSud};
 		//------------------Amérique du Nord-------------------------
 		alaska.setVoisins() = new Territoire[] {territoireNordOuest, alberta, kamchatka};
