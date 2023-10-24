@@ -16,5 +16,9 @@ public class Carte {
         return this.territoire;
     }
 
+	public String getName() {
+        return territoire.getNomTerritoire() + ", " + typeSymbole;
+    }
+
 
 }
