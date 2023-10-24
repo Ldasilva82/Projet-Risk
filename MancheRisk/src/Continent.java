@@ -14,9 +14,15 @@ public class Continent {
 	public String getnomContinent(){
 		return nomContinent;
 	}
+	
+	public int getPoint() {
+		return this.point;
+	}
+	
 	public Territoire[] getList(){
 		return this.territoires;
 	}
+	
 	public void setList(Territoire[] listTerrit) {
 		this.territoires = listTerrit;
 	}
