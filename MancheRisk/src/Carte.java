@@ -2,8 +2,8 @@ public class Carte {
     private Territoire territoire;
 	private String typeSymbole;
 
-	public Carte(String nomTerrit, String symbole) {
-		this.typeSymbole =symbole;
+	public Carte(String nomTerrit, Territoire territoire2) {
+		this.typeSymbole =typeSymbole;
 		//if getNomTerritoire.equals nomTerrit --- à faire
 		this.territoire = territoire;
 	}
