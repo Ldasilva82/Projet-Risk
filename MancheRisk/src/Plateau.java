@@ -2,7 +2,7 @@ public class Plateau{
 
 	//attributs
 	private Continent[] continents;
-	private Case[] plateau;
+	private Territoire[][] plateau;
 	private int largeur;
 	private int hauteur;
 
