@@ -17,6 +17,7 @@ public class Plateau extends AbstractModel {
 	protected Territoire selectedTerritoire;
 	private Continent[] continents;
 	private int nbEchange;
+	private ArrayList<Carte> deck;
 
 	// Constructor
 	public Plateau(int largeur, int hauteur) {
@@ -405,7 +406,7 @@ public class Plateau extends AbstractModel {
       	//-----------------------Australie---------------------------
       	continents[6].setList(new Territoire[] {indonesie,nouvGuinee,australieOccidentale,australieOrientale});
        */
-
+        deck = new ArrayList<Carte>();
 	}
 	
 	
@@ -432,6 +433,10 @@ public class Plateau extends AbstractModel {
 	public ArrayList<Joueur> getOrdreJoueur(){
     	return joueurs;
     }
+	
+	public ArrayList<Carte> getDeck(){
+		return this.deck;
+	}
 	
 	//------------------------Setters--------------------------
 	@Override
