@@ -3,6 +3,8 @@ package game.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Scanner;
+
 import javax.swing.JOptionPane;
 
 public class Plateau extends AbstractModel {
@@ -14,6 +16,7 @@ public class Plateau extends AbstractModel {
 	protected int nbTour;
 	protected Territoire territoireSelected;
 	private Continent[] continents;
+	private int nbEchange;
 
 	// Constructor
 	public Plateau(int largeur, int hauteur) {
@@ -426,6 +429,10 @@ public class Plateau extends AbstractModel {
 		return territoireSelected;
 	}
 	
+	public ArrayList<Joueur> getOrdreJoueur(){
+    	return joueurs;
+    }
+	
 	//------------------------Setters--------------------------
 	@Override
 	public void setTypeCase(int x, int y, TypeCase tc) {
@@ -484,6 +491,7 @@ public class Plateau extends AbstractModel {
 		System.out.println("--------------");
 		
 	}
+	
 
 	@Override
 	public boolean partieTerminer() {
