@@ -1,8 +1,8 @@
 package game.model;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class CarteManagement implements Serializable {
 
@@ -55,6 +55,18 @@ public class CarteManagement implements Serializable {
 	    }
     }
 
+	public String getTypeSymbole() {
+        if (cartes.isEmpty()) {
+            return null; // or throw an exception, depending on your use case
+        }
+        String firstCarte = cartes.get(0);
+        String[] splitCarte = firstCarte.split(" ");
+        if (splitCarte.length < 2) {
+            return null; // or throw an exception, depending on your use case
+        }
+        return splitCarte[0];
+    }
+
     /**
      * Removes a card from the cartes and return it
      */
@@ -77,5 +89,9 @@ public class CarteManagement implements Serializable {
 
         Collections.shuffle(cartes);
     }
+
+
+
+    
     
 }
