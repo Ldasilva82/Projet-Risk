@@ -12,7 +12,7 @@ public class Plateau extends AbstractModel {
 	protected int hauteur;
 	protected int largeur;
 	protected int nbTour;
-	protected Territoire territoireSelected;
+	protected Territoire selectedTerritoire;
 	private Continent[] continents;
 
 	// Constructor
@@ -21,7 +21,7 @@ public class Plateau extends AbstractModel {
 		this.hauteur = hauteur;
 		this.largeur = largeur;
 		this.nbTour = 0;
-		this.territoireSelected = null;
+		this.selectedTerritoire = null;
 		
 		for(int y=0; y<this.getHauteur(); y++) {
 			for (int x=0; x<this.getLargeur(); x++) {
@@ -378,7 +378,7 @@ public class Plateau extends AbstractModel {
         plateau[17][11] = australieOrientale;
         
       /*
-       * /Création des continents - Erreur si pas de commentaire
+       * /Création des continents 
       	continents = new Continent[6];
       	continents[1] = new Continent("Afrique", 3);
       	continents[2] = new Continent("Amérique du Nord", 5);
@@ -423,7 +423,7 @@ public class Plateau extends AbstractModel {
 	}
 	
 	public Territoire getTerSelected() {
-		return territoireSelected;
+		return selectedTerritoire;
 	}
 	
 	//------------------------Setters--------------------------
@@ -434,7 +434,7 @@ public class Plateau extends AbstractModel {
 	}
 	
 	public void setTerritoireSelected(Territoire terSelected) {
-		this.territoireSelected = terSelected;
+		this.selectedTerritoire = terSelected;
 	}
 	
 	public ArrayList<Joueur> setOrdreJoueur(){
@@ -474,15 +474,20 @@ public class Plateau extends AbstractModel {
 		
 	}
 
-	public void selectTer(int x, int y) {
-		territoireSelected = this.plateau[x][y];
-		System.out.println("pays:"+this.plateau[x][y].getNomTerritoire() );
-		System.out.println("voisins:");
-		for (Territoire terr : this.plateau[x][y].getTerritVoisins() ) {
-			System.out.println(terr.getNomTerritoire());
-		}
-		System.out.println("--------------");
-		
+	public void afficherInfoSelectedTerr(int x, int y) {
+		selectedTerritoire = this.plateau[x][y];
+	    
+		// Init StringBuilder => pour construire une string complexe
+	    StringBuilder infoTerritoire = new StringBuilder();
+	    /// Ajout du nom terrriroire
+	    infoTerritoire.append("Territoire : \n ").append(selectedTerritoire.getNomTerritoire()).append("\n\n");
+	    /// Ajout de la liste des pays voisons 
+	    infoTerritoire.append("Voisins :\n");
+	    for (Territoire territoire : selectedTerritoire.getTerritVoisins()) {
+	        infoTerritoire.append(territoire.getNomTerritoire()).append("\n");
+	    }
+
+	    JOptionPane.showMessageDialog(null, infoTerritoire.toString(), "Informations du territoire", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	@Override
