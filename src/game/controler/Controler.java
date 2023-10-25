@@ -12,7 +12,7 @@ public class Controler extends AbstractControler {
 	@Override
 	public void cliqueSur(int x, int y) {
 		// TODO Auto-generated method stub
-		model.selectTer(x, y);
+		model.afficherInfoSelectedTerr(x, y);
 		model.demandeMiseAjourVue();
 
 	}
