@@ -23,6 +23,11 @@ public class Joueur {
 	
 	// Methods
 	/// Getters
+	//Attention possible conflits pour les méthodes
+	public String getNomJoueur() {
+		return this.nomJoueur.concat(" " + prenomJoueur);
+	}
+	
 	public int getNbDe1() {
 		return nbDe1;
 	}
