@@ -94,8 +94,7 @@ public class Joueur {
 		plateau.getDeck().remove(0);
 	}
 
-<<<<<<< HEAD
-=======
+
 	public boolean canTurnInCards(int index1, int index2, int index3) {
         boolean condition = false;
         if (cartePossedee.size() >= 3) {
@@ -142,7 +141,7 @@ public class Joueur {
 	
 
 
->>>>>>> Carte_Piocher
+
 	
 //	public static void main(String[] args) {
 //		Joueur joueur = new Joueur("OK", "trro");
