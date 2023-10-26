@@ -15,7 +15,7 @@ public class Plateau extends AbstractModel {
 	protected int largeur;
 	protected int nbTour;
 	protected Territoire selectedTerritoire;
-	private Continent[] continents;
+	private Continent continent;
 	private int nbEchange;
 	private ArrayList<Carte> deck;
 
@@ -188,37 +188,37 @@ public class Plateau extends AbstractModel {
 
 		// Affecter des cases à des territoires
 				//-----------------------Afrique-----------------------------
-		plateau[10][8]=egypte;
-        plateau[11][8]=egypte;
+		plateau[10][8] = egypte;
+        plateau[11][8] = egypte;
 
-        plateau[7][8]=afriqueNord;
-        plateau[8][8]=afriqueNord;
-        plateau[9][8]=afriqueNord;
-        plateau[7][9]=afriqueNord;
-        plateau[8][9]=afriqueNord;
-        plateau[9][9]=afriqueNord;
-        plateau[8][10]=afriqueNord;
-        plateau[9][10]=afriqueNord;
+        plateau[7][8] = afriqueNord;
+        plateau[8][8] = afriqueNord;
+        plateau[9][8] = afriqueNord;
+        plateau[7][9] = afriqueNord;
+        plateau[8][9] = afriqueNord;
+        plateau[9][9] = afriqueNord;
+        plateau[8][10] = afriqueNord;
+        plateau[9][10] = afriqueNord;
 
-        plateau[12][8]=afriqueOrientale;
-        plateau[10][9]=afriqueOrientale;
-        plateau[11][9]=afriqueOrientale;
-        plateau[12][9]=afriqueOrientale;
-        plateau[10][10]=afriqueOrientale;
-        plateau[11][10]=afriqueOrientale;
-        plateau[12][10]=afriqueOrientale;
-        plateau[10][11]=afriqueOrientale;
-        plateau[11][11]=afriqueOrientale;
+        plateau[12][8] = afriqueOrientale;
+        plateau[10][9] = afriqueOrientale;
+        plateau[11][9] = afriqueOrientale;
+        plateau[12][9] = afriqueOrientale;
+        plateau[10][10] = afriqueOrientale;
+        plateau[11][10] = afriqueOrientale;
+        plateau[12][10] = afriqueOrientale;
+        plateau[10][11] = afriqueOrientale;
+        plateau[11][11] = afriqueOrientale;
 
-        plateau[8][11]=afriqueCentrale;
-        plateau[9][11]=afriqueCentrale;
+        plateau[8][11] = afriqueCentrale;
+        plateau[9][11] = afriqueCentrale;
 
-        plateau[9][12]=afriqueSud;
-        plateau[10][12]=afriqueSud;
-        plateau[11][12]=afriqueSud;
+        plateau[9][12] = afriqueSud;
+        plateau[10][12] = afriqueSud;
+        plateau[11][12] = afriqueSud;
 
-        plateau[12][11]=madagascar;
-        plateau[12][12]=madagascar;
+        plateau[12][11] = madagascar;
+        plateau[12][12] = madagascar;
         
       //------------------Amérique du Nord-------------------------
         plateau[0][1] = alaska;
@@ -381,16 +381,24 @@ public class Plateau extends AbstractModel {
         plateau[17][10] = australieOrientale;
         plateau[17][11] = australieOrientale;
         
-      /*
-       * /Création des continents 
-      	continents = new Continent[6];
-      	continents[1] = new Continent("Afrique", 3);
-      	continents[2] = new Continent("Amérique du Nord", 5);
-      	continents[3] = new Continent("Amérique du Sud", 2);
-      	continents[4] = new Continent("Asie", 7);
-      	continents[5] = new Continent("Europe", 5);
-      	continents[6] = new Continent("Australie", 2);
+        
+       //Création des continents avec les gains de régiments
+        Continent afrique = new Continent("Afrique", 3);
+        Continent ameriqueNord = new Continent("Amérique du Nord", 5);
+        Continent ameriqueSud = new Continent("Amérique du Sud", 2);
+        Continent asie = new Continent("Asie", 7);
+        Continent europe = new Continent("Europe", 5);
+        Continent australie = new Continent("Australie", 2);
       
+
+      	//Affecter les territoires dans des continents
+        afrique.setTerritoiresList(new Territoire[] {egypte, afriqueNord, afriqueOrientale, afriqueCentrale, afriqueSud, madagascar});
+        ameriqueNord.setTerritoiresList(new Territoire[] {alaska, territoireNordOuest, groenland, alberta, ontario, canada, euOuest, euEst, ameriqueCentrale});
+        ameriqueSud.setTerritoiresList(new Territoire[]{venezuela, bresil, perou, argentine});
+        asie.setTerritoiresList(new Territoire[] {oural, siberie, yakoutie, kamchatka, irkoutsk, mongolie, japon, afghanistan, chine, moyenOrient, inde, asieSudEst});
+        europe.setTerritoiresList(new Territoire[] {islande, gb, europeOuest, europeSud, europeNord, scandinavie, russie});
+        australie.setTerritoiresList(new Territoire[] {indonesie, nouvGuinee, australieOccidentale, australieOrientale});
+
       	//Intégration des territoires dans les continents
 
       	//-----------------------Afrique-----------------------------
@@ -407,6 +415,7 @@ public class Plateau extends AbstractModel {
       	continents[6].setList(new Territoire[] {indonesie,nouvGuinee,australieOccidentale,australieOrientale});
        */
         deck = new ArrayList<Carte>();
+
 	}
 	
 	
