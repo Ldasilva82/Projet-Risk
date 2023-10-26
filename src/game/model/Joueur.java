@@ -30,6 +30,9 @@ public class Joueur {
 		return nbDe1;
 	}
 	
+	public ArrayList<Carte> getCartePossedee(){
+		return this.cartePossedee;
+	}
 	
 	/// Setters
 	public void setNbDe1(int nbDé1) {
@@ -54,7 +57,6 @@ public class Joueur {
 		//la retirer du deck de plateau
 		plateau.getDeck().remove(0);
 	}
-
 
 	
 //	public static void main(String[] args) {
