@@ -382,7 +382,7 @@ public class Plateau extends AbstractModel {
         plateau[17][11] = australieOrientale;
         
         
-       //Création des continents avec les gains de régiments
+        //Création des continents avec les gains de régiments
         Continent afrique = new Continent("Afrique", 3);
         Continent ameriqueNord = new Continent("Amérique du Nord", 5);
         Continent ameriqueSud = new Continent("Amérique du Sud", 2);
@@ -390,7 +390,7 @@ public class Plateau extends AbstractModel {
         Continent europe = new Continent("Europe", 5);
         Continent australie = new Continent("Australie", 2);
       
-<<<<<<< HEAD
+
       	//Affecter les territoires dans des continents
         afrique.setTerritoiresList(new Territoire[] {egypte, afriqueNord, afriqueOrientale, afriqueCentrale, afriqueSud, madagascar});
         ameriqueNord.setTerritoiresList(new Territoire[] {alaska, territoireNordOuest, groenland, alberta, ontario, canada, euOuest, euEst, ameriqueCentrale});
@@ -398,11 +398,11 @@ public class Plateau extends AbstractModel {
         asie.setTerritoiresList(new Territoire[] {oural, siberie, yakoutie, kamchatka, irkoutsk, mongolie, japon, afghanistan, chine, moyenOrient, inde, asieSudEst});
         europe.setTerritoiresList(new Territoire[] {islande, gb, europeOuest, europeSud, europeNord, scandinavie, russie});
         australie.setTerritoiresList(new Territoire[] {indonesie, nouvGuinee, australieOccidentale, australieOrientale});
-=======
-      	//Intégration des territoires dans les continents
+
+      	//Intégration des territoires dans les continents A SUPPRIMER ?
 
       	//-----------------------Afrique-----------------------------
-      	continents[1].setList(new Territoire[] {egypte, afriqueNord, afriqueOrientale, afriqueCentrale, afriqueSud, madagascar});
+      	/*continent[1].setList(new Territoire[] {egypte, afriqueNord, afriqueOrientale, afriqueCentrale, afriqueSud, madagascar});
       	//------------------Amérique du Nord-------------------------
       	continents[2].setList(new Territoire[] {alaska, territoireNordOuest, groenland, alberta, ontario, canada, euOuest, euEst, ameriqueCentrale});
       	//-------------------Amérique du Sud-------------------------
@@ -414,10 +414,10 @@ public class Plateau extends AbstractModel {
       	//-----------------------Australie---------------------------
       	continents[6].setList(new Territoire[] {indonesie,nouvGuinee,australieOccidentale,australieOrientale});
        */
-        deck = new ArrayList<Carte>();
->>>>>>> Carte_Piocher
+       
+        //deck = new ArrayList<Carte>(); YANING DESOLEE TON CODE A PETER
+
 	}
-	
 	
 	// Methods 
 	//------------------------Getters--------------------------
