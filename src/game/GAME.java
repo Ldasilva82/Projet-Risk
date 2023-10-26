@@ -40,7 +40,8 @@ public class GAME {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection(DB_URL, USER, PWD); 
-            System.out.println("Connecté");
+            System.out.println("Connecté correctement à la Base");
+            System.out.println("=========Liste des Joueurs=========");
             Statement stmt = conn.createStatement();
             String sql = "Select * from Joueur";
             ResultSet resultSet = stmt.executeQuery(sql);
@@ -53,6 +54,7 @@ public class GAME {
                 System.out.println(joueurBD.getNomJoueur().toUpperCase()+ " " + joueurBD.getPrenomJoueur());
                 model.getOrdreJoueur().add(joueurBD);
             }
+            System.out.println("==========Début du Risk============");
             
             /*
             Fermer les connexions ouvertes de la BD.
