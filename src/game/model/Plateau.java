@@ -399,23 +399,6 @@ public class Plateau extends AbstractModel {
         asie.setTerritoiresList(new Territoire[] {oural, siberie, yakoutie, kamchatka, irkoutsk, mongolie, japon, afghanistan, chine, moyenOrient, inde, asieSudEst});
         europe.setTerritoiresList(new Territoire[] {islande, gb, europeOuest, europeSud, europeNord, scandinavie, russie});
         australie.setTerritoiresList(new Territoire[] {indonesie, nouvGuinee, australieOccidentale, australieOrientale});
-
-      	//Intégration des territoires dans les continents
-
-      	//-----------------------Afrique-----------------------------
-      	/*continent[1].setList(new Territoire[] {egypte, afriqueNord, afriqueOrientale, afriqueCentrale, afriqueSud, madagascar});
-      	//------------------Amérique du Nord-------------------------
-      	continents[2].setList(new Territoire[] {alaska, territoireNordOuest, groenland, alberta, ontario, canada, euOuest, euEst, ameriqueCentrale});
-      	//-------------------Amérique du Sud-------------------------
-      	continents[3].setList( new Territoire[] {venezuela, bresil, perou, argentine});
-      	//-------------------------Asie------------------------------
-      	continents[4].setList(new Territoire[] {oural,siberie,yakoutie,kamchatka,irkoutsk,mongolie,japon,afghanistan,chine,moyenOrient,inde,asieSudEst});
-      	//------------------------Europe-----------------------------
-      	continents[5].setList(new Territoire[] {islande,gb,europeOuest,europeSud,europeNord,scandinavie,russie});
-      	//-----------------------Australie---------------------------
-      	continents[6].setList(new Territoire[] {indonesie,nouvGuinee,australieOccidentale,australieOrientale});
-       */
-       
         
 
 	}
