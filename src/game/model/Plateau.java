@@ -18,6 +18,7 @@ public class Plateau extends AbstractModel {
 	private Continent continent;
 	private int nbEchange;
 	private ArrayList<Carte> deck;
+	
 
 	// Constructor
 	public Plateau(int largeur, int hauteur) {
@@ -402,7 +403,7 @@ public class Plateau extends AbstractModel {
       	//Intégration des territoires dans les continents
 
       	//-----------------------Afrique-----------------------------
-      	continents[1].setList(new Territoire[] {egypte, afriqueNord, afriqueOrientale, afriqueCentrale, afriqueSud, madagascar});
+      	/*continent[1].setList(new Territoire[] {egypte, afriqueNord, afriqueOrientale, afriqueCentrale, afriqueSud, madagascar});
       	//------------------Amérique du Nord-------------------------
       	continents[2].setList(new Territoire[] {alaska, territoireNordOuest, groenland, alberta, ontario, canada, euOuest, euEst, ameriqueCentrale});
       	//-------------------Amérique du Sud-------------------------
@@ -414,7 +415,8 @@ public class Plateau extends AbstractModel {
       	//-----------------------Australie---------------------------
       	continents[6].setList(new Territoire[] {indonesie,nouvGuinee,australieOccidentale,australieOrientale});
        */
-        deck = new ArrayList<Carte>();
+       
+        
 
 	}
 	
