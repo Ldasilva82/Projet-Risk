@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class Joueur {
 	// Attributes
+	private int numeroInscription;
 	protected String nomJoueur;
 	protected String prenomJoueur;
 	protected int nbAttaqueReussie;
@@ -26,6 +27,10 @@ public class Joueur {
 	
 	// Methods
 	/// Getters
+	public int getNumeroInscription() {
+		return this.numeroInscription;
+	}
+	
 	public String getNomJoueur() {
 		return nomJoueur;
 	}
@@ -57,6 +62,10 @@ public class Joueur {
 	}
 	
 	/// Setters
+	public void setNumInscription(int numInscrip) {
+		this.numeroInscription = numInscrip;
+	}
+	
 	public void setNbDe1(int nbDé1) {
 		this.nbDe1 = nbDé1;
 	}
