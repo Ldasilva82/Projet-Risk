@@ -24,6 +24,7 @@ public class Joueur {
 		this.nbDefenseReussie = 0;
 		this.nbDe1 = 0;
 		this.nbTerritoireConquis = 0;
+		
 	}
 	
 	// Methods

@@ -450,7 +450,9 @@ public class Plateau extends AbstractModel {
         europe.setTerritoiresList(new Territoire[] {islande, gb, europeOuest, europeSud, europeNord, scandinavie, russie});
         australie.setTerritoiresList(new Territoire[] {indonesie, nouvGuinee, australieOccidentale, australieOrientale});
         
-
+        Joueur joueurProprioFactice = new Joueur("Lambert","Paul");
+        russie.setProprietaire(joueurProprioFactice);
+        
 	}
 	
 	
@@ -811,6 +813,9 @@ public class Plateau extends AbstractModel {
 	    StringBuilder infoTerritoire = new StringBuilder();
 	    /// Ajout du nom terrriroire
 	    infoTerritoire.append("Territoire : \n ").append(selectedTerritoire.getNomTerritoire()).append("\n\n");
+	    /// Ajout du nb de régiment placé sur le territoire et nom du propriétaire
+	    infoTerritoire.append("Nb de régiment placéss : ").append(selectedTerritoire.getNbRegiments()).append("\n");
+	    infoTerritoire.append("Territoire occupé par : ").append(selectedTerritoire.getProprietaire().getPrenomJoueur()).append(" ").append(selectedTerritoire.getProprietaire().getNomJoueur()).append("\n\n");
 	    /// Ajout de la liste des pays voisons 
 	    infoTerritoire.append("Voisins :\n");
 	    for (Territoire territoire : selectedTerritoire.getTerritVoisins()) {
