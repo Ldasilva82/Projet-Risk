@@ -18,10 +18,11 @@ public class Plateau extends AbstractModel {
 	protected int largeur;
 	protected int nbTour;
 	protected Territoire selectedTerritoire;
-	private Continent continent;
+	private ArrayList<Continent> listeContinents;
 	private int nbEchange;
 	private ArrayList<Carte> deck;
 	protected Scanner scanner;
+	protected ArrayList<Joueur> joueurElimine;
 
 	// Constructor
 	public Plateau(int largeur, int hauteur) {
@@ -32,6 +33,8 @@ public class Plateau extends AbstractModel {
 		this.selectedTerritoire = null;
 		this.joueurs = new ArrayList<Joueur>();
 		this.listeTerritoires = new ArrayList<Territoire>();
+		this.listeContinents = new ArrayList<Continent>();
+		this.joueurElimine = new ArrayList<Joueur>();
 		this.scanner = new Scanner(System.in);		
 		
 		for(int y=0; y<this.getHauteur(); y++) {
@@ -182,7 +185,19 @@ public class Plateau extends AbstractModel {
 				Territoire russie = new Territoire("Russie");
 				russie.setType(TypeCase.RUSSIE);
 				listeTerritoires.add(russie);
-		
+				
+//		for (Territoire ter : listeTerritoires) {
+//			ter.setProprietaire(chat2);
+//			ter.setNbRegiment("+", 1);
+//		}
+//		
+//		groenland.setProprietaire(chat1);
+//		groenland.setNbRegiment("+", 3);
+//		islande.setProprietaire(chat2);
+//		islande.setNbRegiment("+", 3);
+//		scandinavie.setProprietaire(chat2);
+//		ontario.setProprietaire(chat1);
+//		
 		//-------------Afrique---------------
 		egypte.setTerritVoisins(new Territoire[] {afriqueNord, afriqueOrientale, moyenOrient, europeSud});
 		afriqueNord.setTerritVoisins(new Territoire[] {egypte, afriqueOrientale, afriqueCentrale, bresil, europeOuest, europeSud});
@@ -450,9 +465,9 @@ public class Plateau extends AbstractModel {
         europe.setTerritoiresList(new Territoire[] {islande, gb, europeOuest, europeSud, europeNord, scandinavie, russie});
         australie.setTerritoiresList(new Territoire[] {indonesie, nouvGuinee, australieOccidentale, australieOrientale});
         
-        Joueur joueurProprioFactice = new Joueur("Lambert","Paul");
-        russie.setProprietaire(joueurProprioFactice);
-        
+//        Joueur joueurProprioFactice = new Joueur("Lambert","Paul");
+//        russie.setProprietaire(joueurProprioFactice);
+//        
 	}
 	
 	
@@ -499,6 +514,10 @@ public class Plateau extends AbstractModel {
 	
 	public int getNbTour() {
 		return nbTour;
+	}
+	
+	public ArrayList<Joueur> getJoueurElimine() {
+		return joueurElimine;
 	}
 	
 //	méthode qui prend en paramètre le NomTerritoire et renvoit l'objet Territoire auquel il correspond
@@ -549,11 +568,11 @@ public class Plateau extends AbstractModel {
 	}
 
 	
-	
+//	Méthode gérant le déroulement d'un tour en faisant appel aux autres méthodes
 	public void nouveauTour() {
 		if (nbTour==0) {
 			this.setOrdreJoueur();
-			for (int i=1; i<25; i++) {
+			for (int i=1; i<2; i++) {
 				for (Joueur joueur : joueurs) {
 					this.placerRegiment(joueur);
 					
@@ -563,6 +582,8 @@ public class Plateau extends AbstractModel {
 		}
 		else {
 			for (Joueur joueur : joueurs) {
+				this.recevoirTroupe(joueur);
+				//this.echanger(joueur)
 				this.attaquer(joueur);
 				this.deplacer(joueur);
 				
@@ -600,6 +621,42 @@ public class Plateau extends AbstractModel {
 			
 		}
 	}
+	
+//	Cette méthode gère la éception de troupe a placer en début de tour
+	public void recevoirTroupe(Joueur joueur) {
+		int troupeRecu = 0 ;
+		//addition des troupes recues par le controle des territoires
+		int territoirePossedes = 0; 
+		for (Territoire territoire : listeTerritoires) {
+			if (territoire.getProprietaire().equals(joueur)) {
+				territoirePossedes= territoirePossedes + 1;
+			}
+		}
+		troupeRecu = troupeRecu+ (territoirePossedes/3);
+		
+		//addition des troupes recues par le controle total d'un continent
+		for (Continent continent : listeContinents) {
+			ArrayList<Joueur> proprio = new ArrayList<Joueur>();
+			for (Territoire territoire : continent.getTerritoiresList()) {
+				if (!proprio.contains(territoire.getProprietaire())) {
+					proprio.add(territoire.getProprietaire());
+				}
+			}
+			if (proprio.size()==1) {
+				if (proprio.get(0).equals(joueur)) {
+					troupeRecu = troupeRecu+ continent.getPoint();
+				}
+			}
+		}
+		
+//****
+		//Si besoin ajouter les echanges de carte ici
+//****		
+		for (int i=0; i<troupeRecu; i++) {
+			this.placerRegiment(joueur);
+		}
+	}
+	
 	
 //	Cette méthode gère une phase d'attaque d'un Joueur
 	public void attaquer(Joueur joueur) {
@@ -725,6 +782,8 @@ public class Plateau extends AbstractModel {
 					//piocher carte
 //*					
 					if (joueurOut(defenseur)) {
+						joueurElimine.add(defenseur);
+						
 //*						
 						//récupérer carte du defenseur
 //*						
@@ -744,8 +803,9 @@ public class Plateau extends AbstractModel {
 			System.out.println(joueur.getNomJoueur() + " choisi de ne pas attaquer");
 		}
 	}
-	
-//	Cette méthode gère une phase de déplacement d'un Joueur
+
+
+	//	Cette méthode gère une phase de déplacement d'un Joueur
 	public void deplacer(Joueur joueur) {
 		//choix deplacement ou pas
 		System.out.println(joueur.getNomJoueur() + "Voulez vous deplacer des regiments? Oui/Non");
@@ -779,13 +839,17 @@ public class Plateau extends AbstractModel {
 			int ajout = 1;
 			while (ajout !=0) {
 				ajout=0;
+				ArrayList<Territoire> aAjouter = new ArrayList<Territoire>();
 				for (Territoire territoire : destiPossible) {
 					for (Territoire voisin : territoire.getTerritVoisins()) {
 						if (voisin.getProprietaire().equals(joueur) && !destiPossible.contains(voisin)) {
-							destiPossible.add(voisin);
+							aAjouter.add(voisin);
 							ajout=ajout+1;
 						}
 					}
+				}
+				for (Territoire ajoutTer : aAjouter) {
+					destiPossible.add(ajoutTer);
 				}
 			}
 			//print des destinations possibles
@@ -806,6 +870,7 @@ public class Plateau extends AbstractModel {
 		}
 	}
 
+//	Méthode affichant une popup remplie d'info concernant un territoire sur lequel on a cliqué
 	public void afficherInfoSelectedTerr(int x, int y) {
 		selectedTerritoire = this.plateau[x][y];
 	    if (selectedTerritoire.getType() != TypeCase.MER) {
@@ -902,6 +967,23 @@ public class Plateau extends AbstractModel {
 		}
 	}
 	
+//	vérifier si un joueur possède tous les territoire (scénario possible fin de partie)
+	public boolean joueurControleMonde() {
+		ArrayList<Joueur> proprio = new ArrayList<Joueur>();
+		for (Territoire territoire : listeTerritoires) {
+			if (!proprio.contains(territoire.getProprietaire())) {
+				proprio.add(territoire.getProprietaire());
+				System.out.println(territoire.getProprietaire());
+			}
+		}
+		if (proprio.size()==1 && !proprio.get(0).equals(null)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
 	
 	@Override
 	public boolean partieTerminer() {
@@ -909,6 +991,7 @@ public class Plateau extends AbstractModel {
 			return true;
 		}
 		else {
+			System.out.println("La partie est finie");
 			return false;
 		}
 	}
