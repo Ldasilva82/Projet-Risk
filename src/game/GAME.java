@@ -13,7 +13,7 @@ import game.vue.Vue;
 
 /**
  *
- * @author Yaning, Lucas, Ravaka, Pauline, Alex
+ * @author david
  */
 public class GAME {
 
@@ -28,7 +28,7 @@ public class GAME {
         v.setVisible(true);
         while(model.partieTerminer()){
             controler.calculerStepSuivant();
-        } 
+        }
     }
     
 }
