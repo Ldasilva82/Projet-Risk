@@ -27,7 +27,6 @@ public class GAME {
         model.addObservateur(v);
         v.setVisible(true);
         while(model.partieTerminer()){
-        	System.out.println("yes");
             controler.calculerStepSuivant();
         }
     }

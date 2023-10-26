@@ -186,18 +186,18 @@ public class Plateau extends AbstractModel {
 				russie.setType(TypeCase.RUSSIE);
 				listeTerritoires.add(russie);
 				
-//		for (Territoire ter : listeTerritoires) {
-//			ter.setProprietaire(chat2);
-//			ter.setNbRegiment("+", 1);
-//		}
-//		
-//		groenland.setProprietaire(chat1);
-//		groenland.setNbRegiment("+", 3);
-//		islande.setProprietaire(chat2);
-//		islande.setNbRegiment("+", 3);
-//		scandinavie.setProprietaire(chat2);
-//		ontario.setProprietaire(chat1);
-//		
+		for (Territoire ter : listeTerritoires) {
+			ter.setProprietaire(chat2);
+			ter.setNbRegiment("+", 1);
+		}
+		
+		groenland.setProprietaire(chat1);
+		groenland.setNbRegiment("+", 1);
+		islande.setProprietaire(chat2);
+		islande.setNbRegiment("+", 3);
+		scandinavie.setProprietaire(chat2);
+		ontario.setProprietaire(chat1);
+		
 		//-------------Afrique---------------
 		egypte.setTerritVoisins(new Territoire[] {afriqueNord, afriqueOrientale, moyenOrient, europeSud});
 		afriqueNord.setTerritVoisins(new Territoire[] {egypte, afriqueOrientale, afriqueCentrale, bresil, europeOuest, europeSud});
@@ -534,8 +534,7 @@ public class Plateau extends AbstractModel {
 	//------------------------Setters--------------------------
 	@Override
 	public void setTypeCase(int x, int y, TypeCase tc) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 	
 	public void setTerritoireSelected(Territoire terSelected) {
@@ -592,6 +591,7 @@ public class Plateau extends AbstractModel {
 		}
 	}
 	
+	
 //	Cette méthode gère le placement des régiments d'un joueur
 	private void placerRegiment(Joueur joueur) {
 		if (this.territoireLibre()) {
@@ -621,6 +621,7 @@ public class Plateau extends AbstractModel {
 			
 		}
 	}
+	
 	
 //	Cette méthode gère la éception de troupe a placer en début de tour
 	public void recevoirTroupe(Joueur joueur) {
@@ -660,216 +661,251 @@ public class Plateau extends AbstractModel {
 	
 //	Cette méthode gère une phase d'attaque d'un Joueur
 	public void attaquer(Joueur joueur) {
-//		choix attaque ou pas
-		System.out.println(joueur.getNomJoueur() + "Voulez vous effectuer une attaque? Oui/Non");
-		String choixAttaque = this.scanner.nextLine();
-		
-//		Cas ou le joueur répond Oui
-		if (choixAttaque.equals("Oui")) {
-//			choix attaquant
-			System.out.println(joueur.getNomJoueur() + "Lequel de vos territoires passe a l'attaque?");
-			//on propose tous les territoires disposant d'assez de régiments pour une attaque
-			//et ayant des territoires non possédés parmis les voisins
-			for (Territoire territoire : listeTerritoires) {
-				if (territoire.getProprietaire().equals(joueur)) {
-					if (cibleDispo(territoire, joueur)) {
-						if (territoire.getNbRegiments()>=2) {
-							System.out.println(territoire.getNomTerritoire());
-						}
+		int possibilite = 0;
+		for (Territoire territoire : listeTerritoires) {
+			if (territoire.getProprietaire().equals(joueur)) {
+				if (cibleDispo(territoire, joueur)) {
+					if (territoire.getNbRegiments()>=2) {
+						possibilite = possibilite + 1;
 					}
 				}
 			}
-			//le joueur attaquant choisi son territoireAttaquant
-			String choixAttaquant = this.scanner.nextLine();
-			Territoire territoireAttaquant = trouverTerritoireParNom(choixAttaquant);
-			
-//			choix cible
-			//on propose les territoires voisins non possédés
-			System.out.println(joueur.getNomJoueur() + "Quelle est votre cible?");
-			for (Territoire terr : territoireAttaquant.getTerritVoisins() ) {
-				if (terr.getProprietaire().equals(joueur)) {
+		}
+		if (possibilite!=0) {
+			//		choix attaque ou pas
+			System.out.println(joueur.getNomJoueur() + "Voulez vous effectuer une attaque? Oui/Non");
+			String choixAttaque = this.scanner.nextLine();
+
+			//		Cas ou le joueur répond Oui
+			if (choixAttaque.equals("Oui")) {
+				//			choix attaquant
+				System.out.println(joueur.getNomJoueur() + "Lequel de vos territoires passe a l'attaque?");
+				//on propose tous les territoires disposant d'assez de régiments pour une attaque
+				//et ayant des territoires non possédés parmis les voisins
+				for (Territoire territoire : listeTerritoires) {
+					if (territoire.getProprietaire().equals(joueur)) {
+						if (cibleDispo(territoire, joueur)) {
+							if (territoire.getNbRegiments()>=2) {
+								System.out.println(territoire.getNomTerritoire());
+							}
+						}
+					}
+				}
+				//le joueur attaquant choisi son territoireAttaquant
+				String choixAttaquant = this.scanner.nextLine();
+				Territoire territoireAttaquant = trouverTerritoireParNom(choixAttaquant);
+
+				//			choix cible
+				//on propose les territoires voisins non possédés
+				System.out.println(joueur.getNomJoueur() + "Quelle est votre cible?");
+				for (Territoire terr : territoireAttaquant.getTerritVoisins() ) {
+					if (terr.getProprietaire().equals(joueur)) {
+					}
+					else {
+						System.out.println(terr.getNomTerritoire());
+					}
+				}
+				//le joueur attaquant choisit le territoireCible
+				String choixCible = this.scanner.nextLine();
+				Territoire territoireCible = trouverTerritoireParNom(choixCible);
+				//le propriétaire de territoireCible est stocké dans "defenseur"
+				Joueur defenseur = territoireCible.getProprietaire();
+
+				//			choix nb unités engagées (coté attaquant)
+				String choixNb = null;
+				//On propose différents choix selon le nombre de régiments a disposition (il faut qu'il en reste 1 au moins)
+				if (territoireAttaquant.getNbRegiments()>=4) {
+					System.out.println(joueur.getNomJoueur() + "combien de regiments se battront? 1/2/3");
+					choixNb = this.scanner.nextLine();
+				}
+				else if (territoireAttaquant.getNbRegiments()==3) {
+					System.out.println(joueur.getNomJoueur() + "combien de regiments se battront? 1/2");
+					choixNb = this.scanner.nextLine();
+				}
+				else if (territoireAttaquant.getNbRegiments()==2) {
+					choixNb = "1";
+				}
+				//transformation du choix en Integer
+				int numAttaquant = Integer.parseInt(choixNb);
+
+
+				//			choix nb unités engagées (coté defense)
+				String choixNbDefense = null;
+				//On propose différents choix selon le nombre de régiments a disposition
+				if (territoireCible.getNbRegiments()>=2) {
+					System.out.println(defenseur.getNomJoueur() + "combien de regiments se battront? 1/2");
+					choixNbDefense = this.scanner.nextLine();
 				}
 				else {
-					System.out.println(terr.getNomTerritoire());
+					choixNbDefense = "1";
 				}
-			}
-			//le joueur attaquant choisit le territoireCible
-			String choixCible = this.scanner.nextLine();
-			Territoire territoireCible = trouverTerritoireParNom(choixCible);
-			//le propriétaire de territoireCible est stocké dans "defenseur"
-			Joueur defenseur = territoireCible.getProprietaire();
-			
-//			choix nb unités engagées (coté attaquant)
-			String choixNb = null;
-			//On propose différents choix selon le nombre de régiments a disposition (il faut qu'il en reste 1 au moins)
-			if (territoireAttaquant.getNbRegiments()>=4) {
-				System.out.println(joueur.getNomJoueur() + "combien de regiments se battront? 1/2/3");
-				choixNb = this.scanner.nextLine();
-			}
-			else if (territoireAttaquant.getNbRegiments()==3) {
-				System.out.println(joueur.getNomJoueur() + "combien de regiments se battront? 1/2");
-				choixNb = this.scanner.nextLine();
-			}
-			else if (territoireAttaquant.getNbRegiments()==2) {
-				choixNb = "1";
-			}
-			//transformation du choix en Integer
-			int numAttaquant = Integer.parseInt(choixNb);
-			
-			
-//			choix nb unités engagées (coté defense)
-			String choixNbDefense = null;
-			//On propose différents choix selon le nombre de régiments a disposition
-			if (territoireCible.getNbRegiments()>=2) {
-				System.out.println(defenseur.getNomJoueur() + "combien de regiments se battront? 1/2");
-				choixNbDefense = this.scanner.nextLine();
-			}
-			else {
-				choixNbDefense = "1";
-			}
-			//transformation du choix en Integer
-			int numDefenseur = Integer.parseInt(choixNbDefense);
-			
-//			determiner gaganant
-			int BestAttaquant = 0;
-			int BestDefenseur = 0;
-			Joueur gagnant = null;
-			//on affiche les résultats du lancé de l'attaquant et on stocke son meilleur résultat dans BestAttaquant
-			System.out.println("Le joueur attaquant lance, resultats:");
-			for (int i=0; i<numAttaquant; i++) {
-				int lancer = joueur.lancerDes();
-				System.out.println(lancer);
-				if (lancer>BestAttaquant) {
-					BestAttaquant = lancer;
+				//transformation du choix en Integer
+				int numDefenseur = Integer.parseInt(choixNbDefense);
+
+				//			determiner gaganant
+				int BestAttaquant = 0;
+				int BestDefenseur = 0;
+				Joueur gagnant = null;
+				//on affiche les résultats du lancé de l'attaquant et on stocke son meilleur résultat dans BestAttaquant
+				System.out.println("Le joueur attaquant lance, resultats:");
+				for (int i=0; i<numAttaquant; i++) {
+					int lancer = joueur.lancerDes();
+					System.out.println(lancer);
+					if (lancer>BestAttaquant) {
+						BestAttaquant = lancer;
+					}
 				}
-			}
-			//on affiche les résultats du lancé du défenseur et on stocke son meilleur résultat dans BestDefenseur
-			System.out.println("Le joueur defenseur lance, resultats:");
-			for (int i=0; i<numDefenseur; i++) {
-				int lancer = defenseur.lancerDes();
-				System.out.println(lancer);
-				if (lancer>BestDefenseur) {
-					BestDefenseur = lancer;
+				//on affiche les résultats du lancé du défenseur et on stocke son meilleur résultat dans BestDefenseur
+				System.out.println("Le joueur defenseur lance, resultats:");
+				for (int i=0; i<numDefenseur; i++) {
+					int lancer = defenseur.lancerDes();
+					System.out.println(lancer);
+					if (lancer>BestDefenseur) {
+						BestDefenseur = lancer;
+					}
 				}
-			}
-			//Actualisation des stats des joueurs impliqués et définition du gagnant en fonction du résultat
-			if (BestAttaquant>BestDefenseur) {
-				System.out.println("Le joueur attaquant a gagné");	
-				joueur.setNbAttaqueReussie(joueur.getNbAttaqueReussie()+1);
-				gagnant = joueur;
-			}
-			else {
-				System.out.println("Le joueur qui defend a gagné");
-				defenseur.setNbDefenseReussie(defenseur.getNbDefenseReussie()+1);
-				gagnant = defenseur;
-			}
-			
-//			changer regiment en conséquence
-			if (gagnant.equals(defenseur)) {
-				territoireAttaquant.setNbRegiment("-", 1);
-			}
-			else if (gagnant.equals(joueur)) {
-				//cas ou il reste des régiments en défense
-				if (territoireCible.getNbRegiments()>1) {
-					territoireCible.setNbRegiment("-", 1);
+				//Actualisation des stats des joueurs impliqués et définition du gagnant en fonction du résultat
+				if (BestAttaquant>BestDefenseur) {
+					System.out.println("Le joueur attaquant a gagné");	
+					joueur.setNbAttaqueReussie(joueur.getNbAttaqueReussie()+1);
+					gagnant = joueur;
 				}
-				//cas ou c'était le dernier régiment en défense
 				else {
-					territoireCible.setProprietaire(joueur);
+					System.out.println("Le joueur qui defend a gagné");
+					defenseur.setNbDefenseReussie(defenseur.getNbDefenseReussie()+1);
+					gagnant = defenseur;
+				}
+
+				//			changer regiment en conséquence
+				if (gagnant.equals(defenseur)) {
 					territoireAttaquant.setNbRegiment("-", 1);
-					gagnant.setNbTerritoireConquis(gagnant.getNbTerritoireConquis()+1);
-//*
-					//piocher carte
-//*					
-					if (joueurOut(defenseur)) {
-						joueurElimine.add(defenseur);
-						
-//*						
-						//récupérer carte du defenseur
-//*						
-					}
-					
-					
 				}
+				else if (gagnant.equals(joueur)) {
+					//cas ou il reste des régiments en défense
+					if (territoireCible.getNbRegiments()>1) {
+						territoireCible.setNbRegiment("-", 1);
+					}
+					//cas ou c'était le dernier régiment en défense
+					else {
+						territoireCible.setProprietaire(joueur);
+						territoireAttaquant.setNbRegiment("-", 1);
+						gagnant.setNbTerritoireConquis(gagnant.getNbTerritoireConquis()+1);
+						//*
+						//piocher carte
+						//*					
+						if (joueurOut(defenseur)) {
+							joueurElimine.add(defenseur);
+
+							//*						
+							//récupérer carte du defenseur
+							//*						
+						}
+
+
+					}
+				}
+
+				//			demander si on continue d'attaquer
+				System.out.println(joueur.getNomJoueur() + "Vous avez le droit de continuer a attaquer (un refus vous feras passer a la phase de déplacement");
+				this.attaquer(joueur);
 			}
-			
-//			demander si on continue d'attaquer
-			System.out.println(joueur.getNomJoueur() + "Vous avez le droit de continuer a attaquer (un refus vous feras passer a la phase de déplacement");
-			this.attaquer(joueur);
+
+			//		Cas ou le joueur répond Non 
+			else if (choixAttaque.equals("Non")){
+				System.out.println(joueur.getNomJoueur() + " choisi de ne pas attaquer");
+			}
 		}
-		
-//		Cas ou le joueur répond Non 
-		else if (choixAttaque.equals("Non")){
-			System.out.println(joueur.getNomJoueur() + " choisi de ne pas attaquer");
+		else {
+			System.out.println(joueur.getNomJoueur() + " Aucun de vos territoires ne peut attaquer");
 		}
 	}
 
-
-	//	Cette méthode gère une phase de déplacement d'un Joueur
+	
+//	Cette méthode gère une phase de déplacement d'un Joueur
 	public void deplacer(Joueur joueur) {
-		//choix deplacement ou pas
-		System.out.println(joueur.getNomJoueur() + "Voulez vous deplacer des regiments? Oui/Non");
-		String choixDeplacement = this.scanner.nextLine();
-//		Cas ou le joueur répond Oui
-		if (choixDeplacement.equals("Oui")) {	
-			//choix du territoire de départ
-			System.out.println("De quel territoire doivent partir les troupes?");
-			for (Territoire territoire : listeTerritoires) {
-				if (territoire.getProprietaire().equals(joueur)) {
-					if (voisinDispo(territoire, joueur)) {
-						if (territoire.getNbRegiments()>=2) {
-							System.out.println(territoire.getNomTerritoire());
-						}
+		int possibilite = 0;
+		//possibilité de déplacement ou pas
+		for (Territoire territoire : listeTerritoires) {
+			if (territoire.getProprietaire().equals(joueur)) {
+				if (voisinDispo(territoire, joueur)) {
+					if (territoire.getNbRegiments()>=2) {
+						possibilite= possibilite+1;
 					}
 				}
 			}
-			String choixDepart = this.scanner.nextLine();
-			Territoire territoireDepart = trouverTerritoireParNom(choixDepart);
-			
-//			Choix de la destination
-			//création d'une liste de destination possible en rechercheant les voisins des voisins 
-			//jusqu'a ce qu'il n'y ai plus de nouveaux ajouts
-			System.out.println("Vers quel territoire doivent partir les troupes?");
-			ArrayList<Territoire> destiPossible = new ArrayList<Territoire>();
-			for (Territoire voisin : territoireDepart.getTerritVoisins()) {
-				if (voisin.getProprietaire().equals(joueur)) {
-					destiPossible.add(voisin);
-				}
-			}
-			int ajout = 1;
-			while (ajout !=0) {
-				ajout=0;
-				ArrayList<Territoire> aAjouter = new ArrayList<Territoire>();
-				for (Territoire territoire : destiPossible) {
-					for (Territoire voisin : territoire.getTerritVoisins()) {
-						if (voisin.getProprietaire().equals(joueur) && !destiPossible.contains(voisin)) {
-							aAjouter.add(voisin);
-							ajout=ajout+1;
+		}
+		if (possibilite!=0) {
+			//choix deplacement ou pas
+			System.out.println(joueur.getNomJoueur() + "Voulez vous deplacer des regiments? Oui/Non");
+			String choixDeplacement = this.scanner.nextLine();
+			//		Cas ou le joueur répond Oui
+			if (choixDeplacement.equals("Oui")) {	
+				//choix du territoire de départ
+				System.out.println("De quel territoire doivent partir les troupes?");
+				for (Territoire territoire : listeTerritoires) {
+					if (territoire.getProprietaire().equals(joueur)) {
+						if (voisinDispo(territoire, joueur)) {
+							if (territoire.getNbRegiments()>=2) {
+								System.out.println(territoire.getNomTerritoire());
+							}
 						}
 					}
 				}
-				for (Territoire ajoutTer : aAjouter) {
-					destiPossible.add(ajoutTer);
+
+				String choixDepart = this.scanner.nextLine();
+				Territoire territoireDepart = trouverTerritoireParNom(choixDepart);
+
+				//			Choix de la destination
+				//création d'une liste de destination possible en rechercheant les voisins des voisins 
+				//jusqu'a ce qu'il n'y ai plus de nouveaux ajouts
+				System.out.println("Vers quel territoire doivent partir les troupes?");
+				ArrayList<Territoire> destiPossible = new ArrayList<Territoire>();
+				for (Territoire voisin : territoireDepart.getTerritVoisins()) {
+					if (voisin.getProprietaire().equals(joueur)) {
+						destiPossible.add(voisin);
+					}
 				}
+				int ajout = 1;
+				while (ajout !=0) {
+					ajout=0;
+					ArrayList<Territoire> aAjouter = new ArrayList<Territoire>();
+					for (Territoire territoire : destiPossible) {
+						for (Territoire voisin : territoire.getTerritVoisins()) {
+							if (voisin.getProprietaire().equals(joueur) && !destiPossible.contains(voisin)) {
+								if (!aAjouter.contains(voisin)) {
+									aAjouter.add(voisin);
+									ajout=ajout+1;
+								}
+							}
+						}
+					}
+					for (Territoire ajoutTer : aAjouter) {
+						destiPossible.add(ajoutTer);
+					}
+				}
+				//print des destinations possibles
+				for (Territoire destination : destiPossible) {
+					System.out.println(destination.getNomTerritoire());
+				}
+				String choixArrivee = this.scanner.nextLine();
+				Territoire territoireArrivee = trouverTerritoireParNom(choixArrivee);
+
+				//			choix du nombre d'unités a déplacer
+				System.out.println(joueur.getNomJoueur() + "Combien de troupes deplacer? (de 1 a "+ (territoireDepart.getNbRegiments()-1));
+				String choixNbTroupe = this.scanner.nextLine();
+				int numTroupe = Integer.parseInt(choixNbTroupe);
+
+				//			déplacement des troupes
+				territoireDepart.setNbRegiment("-", numTroupe);
+				territoireArrivee.setNbRegiment("+", numTroupe);
 			}
-			//print des destinations possibles
-			for (Territoire destination : destiPossible) {
-				System.out.println(destination.getNomTerritoire());
-			}
-			String choixArrivee = this.scanner.nextLine();
-			Territoire territoireArrivee = trouverTerritoireParNom(choixArrivee);
-			
-//			choix du nombre d'unités a déplacer
-			System.out.println(joueur.getNomJoueur() + "Combien de troupes deplacer? (de 1 a "+ (territoireDepart.getNbRegiments()-1));
-			String choixNbTroupe = this.scanner.nextLine();
-			int numTroupe = Integer.parseInt(choixNbTroupe);
-			
-//			déplacement des troupes
-			territoireDepart.setNbRegiment("-", numTroupe);
-			territoireArrivee.setNbRegiment("+", numTroupe);
+		}
+		else {
+			System.out.println(joueur.getNomJoueur() + " aucun de vos régiments n'est en mesure de se déplacer");
 		}
 	}
 
+	
 //	Méthode affichant une popup remplie d'info concernant un territoire sur lequel on a cliqué
 	public void afficherInfoSelectedTerr(int x, int y) {
 		selectedTerritoire = this.plateau[x][y];
@@ -969,14 +1005,19 @@ public class Plateau extends AbstractModel {
 	
 //	vérifier si un joueur possède tous les territoire (scénario possible fin de partie)
 	public boolean joueurControleMonde() {
-		ArrayList<Joueur> proprio = new ArrayList<Joueur>();
-		for (Territoire territoire : listeTerritoires) {
-			if (!proprio.contains(territoire.getProprietaire())) {
-				proprio.add(territoire.getProprietaire());
-				System.out.println(territoire.getProprietaire());
+		int verif = 0;
+		for (Joueur joueur : joueurs) {
+			int territoirePossedes = 0; 
+			for (Territoire territoire : listeTerritoires) {
+				if (territoire.getProprietaire().equals(joueur)) {
+					territoirePossedes= territoirePossedes + 1;
+				}
+			}
+			if (territoirePossedes==42) {
+				verif = verif + 1;
 			}
 		}
-		if (proprio.size()==1 && !proprio.get(0).equals(null)) {
+		if (verif==1) {
 			return true;
 		}
 		else {
@@ -987,7 +1028,7 @@ public class Plateau extends AbstractModel {
 	
 	@Override
 	public boolean partieTerminer() {
-		if(nbTour!=10) {
+		if(!joueurControleMonde()) {
 			return true;
 		}
 		else {
