@@ -808,21 +808,27 @@ public class Plateau extends AbstractModel {
 
 	public void afficherInfoSelectedTerr(int x, int y) {
 		selectedTerritoire = this.plateau[x][y];
-	    
-		// Init StringBuilder => pour construire une string complexe
-	    StringBuilder infoTerritoire = new StringBuilder();
-	    /// Ajout du nom terrriroire
-	    infoTerritoire.append("Territoire : \n ").append(selectedTerritoire.getNomTerritoire()).append("\n\n");
-	    /// Ajout du nb de régiment placé sur le territoire et nom du propriétaire
-	    infoTerritoire.append("Nb de régiment placéss : ").append(selectedTerritoire.getNbRegiments()).append("\n");
-	    infoTerritoire.append("Territoire occupé par : ").append(selectedTerritoire.getProprietaire().getPrenomJoueur()).append(" ").append(selectedTerritoire.getProprietaire().getNomJoueur()).append("\n\n");
-	    /// Ajout de la liste des pays voisons 
-	    infoTerritoire.append("Voisins :\n");
-	    for (Territoire territoire : selectedTerritoire.getTerritVoisins()) {
-	        infoTerritoire.append(territoire.getNomTerritoire()).append("\n");
-	    }
+	    if (selectedTerritoire.getType() != TypeCase.MER) {
+	    	// Init StringBuilder => pour construire une string complexe
+		    StringBuilder infoTerritoire = new StringBuilder();
+		    /// Ajout du nom terrriroire
+		    infoTerritoire.append("Territoire : \n ").append(selectedTerritoire.getNomTerritoire()).append("\n\n");
+		    /// Ajout du nb de régiment placé sur le territoire et nom du propriétaire
+		    if (selectedTerritoire.getProprietaire() != null) {
+		    	infoTerritoire.append("Nb de régiment placéss : ").append(selectedTerritoire.getNbRegiments()).append("\n");
+			    infoTerritoire.append("Territoire occupé par : ").append(selectedTerritoire.getProprietaire().getPrenomJoueur()).append(" ").append(selectedTerritoire.getProprietaire().getNomJoueur()).append("\n\n");
+		    }
+		    	
+		    
+		    /// Ajout de la liste des pays voisons 
+		    infoTerritoire.append("Voisins :\n");
+		    for (Territoire territoire : selectedTerritoire.getTerritVoisins()) {
+		        infoTerritoire.append(territoire.getNomTerritoire()).append("\n");
+		    }
 
-	    JOptionPane.showMessageDialog(null, infoTerritoire.toString(), "Informations du territoire", JOptionPane.INFORMATION_MESSAGE);
+		    JOptionPane.showMessageDialog(null, infoTerritoire.toString(), "Informations du territoire", JOptionPane.INFORMATION_MESSAGE);
+	    }
+		
 	}
 	
 

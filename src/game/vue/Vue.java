@@ -45,8 +45,8 @@ public class Vue extends javax.swing.JFrame implements Observateur{
             y = 0;
         }
         this.mouseListener.updateDimension(x, y, x+cote*model.getHauteur(), y+cote*model.getLargeur(), cote);
-        for(int xP=0; xP<model.getHauteur();xP++){
-            for(int yP=0; yP<model.getLargeur();yP++){
+        for(int xP=0; xP<model.getLargeur();xP++){
+            for(int yP=0; yP<model.getHauteur();yP++){
                 switch(model.getTypeCase(xP, yP)){
                   
                     case MER : 

@@ -21,7 +21,7 @@ public class GAME {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Plateau model = new Plateau(19,19); 
+        Plateau model = new Plateau(19,14); 
         Controler controler = new Controler(model);
         Vue v = new Vue(model,controler);
         model.addObservateur(v);
