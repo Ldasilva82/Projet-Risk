@@ -24,18 +24,41 @@ public class Joueur {
 	// Methods
 	/// Getters
 	//Attention possible conflits pour les méthodes
-	public String getNomJoueur() {
-		return this.nomJoueur.concat(" " + prenomJoueur);
+	public String getNomPrenomJoueur() {
+		return this.nomJoueur.toUpperCase().concat(" " + prenomJoueur);
+	}
+	
+	public int getNbAttaqueReussie() {
+		return nbAttaqueReussie;
+	}
+	
+	public int getNbDefenseReussie() {
+		return nbDefenseReussie;
 	}
 	
 	public int getNbDe1() {
 		return nbDe1;
 	}
 	
+	public int getNbTerritoireConquis() {
+		return nbTerritoireConquis;
+	}
 	
 	/// Setters
+	public void setNbAttaqueReussie(int nbAttaqueReussie) {
+		this.nbAttaqueReussie = nbAttaqueReussie;
+	}
+	
+	public void setNbDefenseReussie(int nbDefenseReussie) {
+		this.nbDefenseReussie = nbDefenseReussie;
+	}
+	
 	public void setNbDe1(int nbDé1) {
 		this.nbDe1 = nbDé1;
+	}
+	
+	public void setTerritoireConquis(int nbTerritoireConquis) {
+		this.nbTerritoireConquis = nbTerritoireConquis;
 	}
 	
 	/// Others

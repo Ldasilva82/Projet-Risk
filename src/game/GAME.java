@@ -63,7 +63,7 @@ public class GAME {
                 String prenomJoueur = resultSet.getString("prenomJoueur");
                 String numInscriptionJoueur = resultSet.getString("numInscriptionJoueur");
                 Joueur joueurBD = new Joueur(nomJoueur,prenomJoueur);
-                System.out.println(joueurBD.getNomJoueur());
+                System.out.println(joueurBD.getNomPrenomJoueur());
             }
             
             /*
