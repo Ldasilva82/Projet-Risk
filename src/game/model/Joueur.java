@@ -1,5 +1,6 @@
 package game.model;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Joueur {
@@ -10,6 +11,8 @@ public class Joueur {
 	protected int nbDefenseReussie;
 	protected int nbDe1;
 	protected int nbTerritoireConquis;
+	private Plateau plateau;
+	private ArrayList<Carte> cartePossedee;
 	
 	// Constructor
 	public Joueur(String nom, String prenom) {
@@ -41,6 +44,15 @@ public class Joueur {
 	    	this.setNbDe1(nbDe1+1);
 	    }
 	    return value;
+	}
+	
+	public void piocher() {
+		//recupérer la carte situé en première position du deck de plateau 
+		Carte premiereCarte = plateau.getDeck().get(0);
+		//l'ajouter à la liste cartePossedee
+		cartePossedee.add(premiereCarte);
+		//la retirer du deck de plateau
+		plateau.getDeck().remove(0);
 	}
 
 

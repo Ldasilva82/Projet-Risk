@@ -17,6 +17,7 @@ public class Plateau extends AbstractModel {
 	protected Territoire selectedTerritoire;
 	private Continent continent;
 	private int nbEchange;
+	private ArrayList<Carte> deck;
 
 	// Constructor
 	public Plateau(int largeur, int hauteur) {
@@ -389,6 +390,7 @@ public class Plateau extends AbstractModel {
         Continent europe = new Continent("Europe", 5);
         Continent australie = new Continent("Australie", 2);
       
+<<<<<<< HEAD
       	//Affecter les territoires dans des continents
         afrique.setTerritoiresList(new Territoire[] {egypte, afriqueNord, afriqueOrientale, afriqueCentrale, afriqueSud, madagascar});
         ameriqueNord.setTerritoiresList(new Territoire[] {alaska, territoireNordOuest, groenland, alberta, ontario, canada, euOuest, euEst, ameriqueCentrale});
@@ -396,6 +398,24 @@ public class Plateau extends AbstractModel {
         asie.setTerritoiresList(new Territoire[] {oural, siberie, yakoutie, kamchatka, irkoutsk, mongolie, japon, afghanistan, chine, moyenOrient, inde, asieSudEst});
         europe.setTerritoiresList(new Territoire[] {islande, gb, europeOuest, europeSud, europeNord, scandinavie, russie});
         australie.setTerritoiresList(new Territoire[] {indonesie, nouvGuinee, australieOccidentale, australieOrientale});
+=======
+      	//Intégration des territoires dans les continents
+
+      	//-----------------------Afrique-----------------------------
+      	continents[1].setList(new Territoire[] {egypte, afriqueNord, afriqueOrientale, afriqueCentrale, afriqueSud, madagascar});
+      	//------------------Amérique du Nord-------------------------
+      	continents[2].setList(new Territoire[] {alaska, territoireNordOuest, groenland, alberta, ontario, canada, euOuest, euEst, ameriqueCentrale});
+      	//-------------------Amérique du Sud-------------------------
+      	continents[3].setList( new Territoire[] {venezuela, bresil, perou, argentine});
+      	//-------------------------Asie------------------------------
+      	continents[4].setList(new Territoire[] {oural,siberie,yakoutie,kamchatka,irkoutsk,mongolie,japon,afghanistan,chine,moyenOrient,inde,asieSudEst});
+      	//------------------------Europe-----------------------------
+      	continents[5].setList(new Territoire[] {islande,gb,europeOuest,europeSud,europeNord,scandinavie,russie});
+      	//-----------------------Australie---------------------------
+      	continents[6].setList(new Territoire[] {indonesie,nouvGuinee,australieOccidentale,australieOrientale});
+       */
+        deck = new ArrayList<Carte>();
+>>>>>>> Carte_Piocher
 	}
 	
 	
@@ -422,6 +442,10 @@ public class Plateau extends AbstractModel {
 	public ArrayList<Joueur> getOrdreJoueur(){
     	return joueurs;
     }
+	
+	public ArrayList<Carte> getDeck(){
+		return this.deck;
+	}
 	
 	//------------------------Setters--------------------------
 	@Override
