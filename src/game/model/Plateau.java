@@ -715,8 +715,15 @@ public class Plateau extends AbstractModel {
 				String choixNb = null;
 				//On propose différents choix selon le nombre de régiments a disposition (il faut qu'il en reste 1 au moins)
 				if (territoireAttaquant.getNbRegiments()>=4) {
+					int numAttaquant = 0;
 					System.out.println(joueur.getNomJoueur() + "combien de regiments se battront? 1/2/3");
-					choixNb = this.scanner.nextLine();
+					while (numAttaquant < 1 || numAttaquant > 3) {
+						choixNb = this.scanner.nextLine();
+						numAttaquant = Integer.parseInt(choixNb);
+						if (numAttaquant < 1 || numAttaquant > 3) {
+							System.out.println("Veuillez sélectionner un nombre correct");
+						}
+					}
 				}
 				else if (territoireAttaquant.getNbRegiments()==3) {
 					System.out.println(joueur.getNomJoueur() + "combien de regiments se battront? 1/2");
