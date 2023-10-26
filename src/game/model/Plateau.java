@@ -455,6 +455,11 @@ public class Plateau extends AbstractModel {
 	}
 	
 	//------------------------Others--------------------------
+	public void Deck() {
+		Carte carte = new Carte();
+		carte.combineLists();
+	}
+	
 	public void nouveauTour() {
 		if (nbTour==0) {
 			this.setOrdreJoueur();
