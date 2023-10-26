@@ -26,8 +26,30 @@ public class Joueur {
 	
 	// Methods
 	/// Getters
+	public String getNomJoueur() {
+		return nomJoueur;
+	}
+
+	public String getPrenomJoueur() {
+		return prenomJoueur;
+	}
+	
 	public int getNbDe1() {
 		return nbDe1;
+	}
+	
+	public int getNbAttaqueReussie() {
+		return nbAttaqueReussie;
+	}
+
+
+	public int getNbDefenseReussie() {
+		return nbDefenseReussie;
+	}
+
+
+	public int getNbTerritoireConquis() {
+		return nbTerritoireConquis;
 	}
 	
 	public ArrayList<Carte> getCartePossedee(){
@@ -37,6 +59,18 @@ public class Joueur {
 	/// Setters
 	public void setNbDe1(int nbDé1) {
 		this.nbDe1 = nbDé1;
+	}
+	
+	public void setNbAttaqueReussie(int nbAttaqueReussie) {
+		this.nbAttaqueReussie = nbAttaqueReussie;
+	}
+	
+	public void setNbDefenseReussie(int nbDefenseReussie) {
+		this.nbDefenseReussie = nbDefenseReussie;
+	}
+	
+	public void setNbTerritoireConquis(int nbTerritoireConquis) {
+		this.nbTerritoireConquis = nbTerritoireConquis;
 	}
 	
 	/// Others

@@ -20,7 +20,7 @@ public class Controler extends AbstractControler {
 	@Override
 	public void calculerStepSuivant() {
 		model.nouveauTour();
-		
+		System.out.println("test cont");
 		// TODO Auto-generated method stub
 
 	}
