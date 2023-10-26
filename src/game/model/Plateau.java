@@ -4,6 +4,7 @@ package game.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -449,7 +450,9 @@ public class Plateau extends AbstractModel {
         europe.setTerritoiresList(new Territoire[] {islande, gb, europeOuest, europeSud, europeNord, scandinavie, russie});
         australie.setTerritoiresList(new Territoire[] {indonesie, nouvGuinee, australieOccidentale, australieOrientale});
         
-
+        Joueur joueurProprioFactice = new Joueur("Lambert","Paul");
+        russie.setProprietaire(joueurProprioFactice);
+        
 	}
 	
 	
@@ -487,6 +490,11 @@ public class Plateau extends AbstractModel {
 	
 	public ArrayList<Carte> getDeck(){
 		return this.deck;
+	}
+
+	public int getNbEchange(){
+		return nbEchange;
+
 	}
 	
 	public int getNbTour() {
@@ -531,10 +539,16 @@ public class Plateau extends AbstractModel {
 	}
 	
 	//------------------------Others--------------------------
-	public void Deck() {
+	public List<String> Deck() {
 		Carte carte = new Carte();
-		carte.combineLists();
+		List<String> combinedList = carte.combineLists();
+		for (String card : combinedList) {
+			System.out.println(card);
+		}
+		return combinedList;
 	}
+
+	
 	
 	public void nouveauTour() {
 		if (nbTour==0) {
@@ -794,18 +808,27 @@ public class Plateau extends AbstractModel {
 
 	public void afficherInfoSelectedTerr(int x, int y) {
 		selectedTerritoire = this.plateau[x][y];
-	    
-		// Init StringBuilder => pour construire une string complexe
-	    StringBuilder infoTerritoire = new StringBuilder();
-	    /// Ajout du nom terrriroire
-	    infoTerritoire.append("Territoire : \n ").append(selectedTerritoire.getNomTerritoire()).append("\n\n");
-	    /// Ajout de la liste des pays voisons 
-	    infoTerritoire.append("Voisins :\n");
-	    for (Territoire territoire : selectedTerritoire.getTerritVoisins()) {
-	        infoTerritoire.append(territoire.getNomTerritoire()).append("\n");
-	    }
+	    if (selectedTerritoire.getType() != TypeCase.MER) {
+	    	// Init StringBuilder => pour construire une string complexe
+		    StringBuilder infoTerritoire = new StringBuilder();
+		    /// Ajout du nom terrriroire
+		    infoTerritoire.append("Territoire : \n ").append(selectedTerritoire.getNomTerritoire()).append("\n\n");
+		    /// Ajout du nb de régiment placé sur le territoire et nom du propriétaire
+		    if (selectedTerritoire.getProprietaire() != null) {
+		    	infoTerritoire.append("Nb de régiment placéss : ").append(selectedTerritoire.getNbRegiments()).append("\n");
+			    infoTerritoire.append("Territoire occupé par : ").append(selectedTerritoire.getProprietaire().getPrenomJoueur()).append(" ").append(selectedTerritoire.getProprietaire().getNomJoueur()).append("\n\n");
+		    }
+		    	
+		    
+		    /// Ajout de la liste des pays voisons 
+		    infoTerritoire.append("Voisins :\n");
+		    for (Territoire territoire : selectedTerritoire.getTerritVoisins()) {
+		        infoTerritoire.append(territoire.getNomTerritoire()).append("\n");
+		    }
 
-	    JOptionPane.showMessageDialog(null, infoTerritoire.toString(), "Informations du territoire", JOptionPane.INFORMATION_MESSAGE);
+		    JOptionPane.showMessageDialog(null, infoTerritoire.toString(), "Informations du territoire", JOptionPane.INFORMATION_MESSAGE);
+	    }
+		
 	}
 	
 

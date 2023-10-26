@@ -13,6 +13,8 @@ public class Joueur {
 	protected int nbTerritoireConquis;
 	private Plateau plateau;
 	private ArrayList<Carte> cartePossedee;
+	private Territoire territoire;
+	private Carte carte;
 	
 	// Constructor
 	public Joueur(String nom, String prenom) {
@@ -22,6 +24,7 @@ public class Joueur {
 		this.nbDefenseReussie = 0;
 		this.nbDe1 = 0;
 		this.nbTerritoireConquis = 0;
+		
 	}
 	
 	// Methods
@@ -91,6 +94,54 @@ public class Joueur {
 		//la retirer du deck de plateau
 		plateau.getDeck().remove(0);
 	}
+
+
+	public boolean canTurnInCards(int index1, int index2, int index3) {
+        boolean condition = false;
+        if (cartePossedee.size() >= 3) {
+            Carte typeSymbole1 = cartePossedee.get(index1);
+            Carte typeSymbole2 = cartePossedee.get(index2);
+            Carte typeSymbole3 = cartePossedee.get(index3);
+            // Same type
+            if (typeSymbole1.equals(typeSymbole2) && typeSymbole1.equals(typeSymbole3)) {
+                condition = true;
+                // Different type
+            } else if (!typeSymbole1.equals(typeSymbole2) && !typeSymbole1.equals(typeSymbole3) && !typeSymbole2.equals(typeSymbole3)) {
+                condition = true;
+                // One Joker and two of the same type symbol
+            } else if ((typeSymbole1.equals("Joker") && typeSymbole2.equals(typeSymbole3)) ||
+                    (typeSymbole2.equals("Joker") && typeSymbole1.equals(typeSymbole3)) ||
+                    (typeSymbole3.equals("Joker") && typeSymbole1.equals(typeSymbole2))) {
+                condition = true;
+            }
+        }
+        return condition;
+    }
+
+	public void echangeCarte(int index1, int index2, int index3){
+		
+		if (canTurnInCards(index1, index2, index3)) {
+			int nbe = plateau.getNbEchange();
+            int armiesEarned = 0;
+            if (nbe == 1) {
+                armiesEarned = 4;
+            } else if (nbe == 2) {
+                armiesEarned = 6;
+            } else if (nbe == 3) {
+                armiesEarned = 8;
+            } else if (nbe == 4) {
+                armiesEarned = 10;
+            }else if (nbe == 5) {
+                armiesEarned = 12;
+			}else if (nbe == 6) {
+                armiesEarned = 15;
+			}	
+            nbe++;
+        }
+    }
+	
+
+
 
 	
 //	public static void main(String[] args) {
