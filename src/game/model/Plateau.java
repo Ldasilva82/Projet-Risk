@@ -40,11 +40,6 @@ public class Plateau extends AbstractModel {
 				this.plateau[x][y]= newTer;
 			}
 		}
-		
-		Joueur chat1 = new Joueur("jose", "Luis");
-		Joueur chat2 = new Joueur("Nicolas", "Anelka");
-		this.getJoueurs().add(chat1);
-		this.getJoueurs().add(chat2);
 		//------------------Amérique du Nord------------------------
 				Territoire egypte = new Territoire("Egypte");
 				egypte.setType(TypeCase.EGYPTE);
