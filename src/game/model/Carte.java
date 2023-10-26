@@ -40,7 +40,7 @@ public class Carte {
 	        cartesJoker.addAll(carteJoker.cartesJoker);
 	    }
 	    
-	    public void combineLists() {
+	    public List<String> combineLists() {
 	        getCarteManagementcTerritoire();
 	        getCarteManagementJoker();
 
@@ -48,17 +48,42 @@ public class Carte {
 	        combinedList.addAll(cartesJoker);  	
 	        combinedList.addAll(cartesTerritoire);
 	        Collections.shuffle(combinedList);
-	        //System.out.println(combinedList);
-	        for (String carte : combinedList) {
-		    	
-		       // System.out.println(carte);
-		       
-		    }
+	     
+
+	        return combinedList;
 	    }
 
 	       // System.out.println(combinedList);
 
-	    public String retirer() {
+	       public String getTypeSymbol() {
+			List<String> com = combineLists(); // 调用 combineLists() 方法来填充 combinedList
+			if (com != null && !com.isEmpty()) {
+				String combinedString = com.get(0); // 获取列表中的第二个元素
+        // 使用字符串切分方法
+			String[] parts = combinedString.split(" "); // 假设根据空格进行切分
+			if (parts.length >= 2) {
+				return parts[1]; // 返回切分后的第二部分
+        }
+    }
+    		return null;
+	   }
+
+	   public String getTerritoireNom() {
+			List<String> com = combineLists(); // 调用 combineLists() 方法来填充 combinedList
+			if (com != null && !com.isEmpty()) {
+				String combinedString = com.get(1); // 获取列表中的第二个元素
+        // 使用字符串切分方法
+			String[] parts = combinedString.split(" "); // 假设根据空格进行切分
+			if (parts.length >= 2) {
+				return parts[1]; // 返回切分后的第二部分
+        }
+    }
+    		return null;
+	   }
+	    
+	  
+
+		public String retirer() {
 	        String retirerCarte = combinedList.get(0);
 	        combinedList.remove(0);
 	        return retirerCarte;
@@ -66,37 +91,6 @@ public class Carte {
 
 	    public void add(String card) {
 	    	combinedList.add(card);
-	    }
-	    
-	    public String getTypeSymbol() {
-	        combineLists(); // 调用 combineLists() 方法来填充 combinedList
-	        if (combinedList != null && !combinedList.isEmpty()) {
-	            return combinedList.get(0);
-	        }
-	        return null;
-	    }
-	    
-	    public boolean canTurnInCards(int index1, int index2, int index3) {
-	        boolean condition = false;
-	        combineLists(); // 调用 combineLists() 方法来填充 combinedList
-	        if (avoirCarte.size() >= 3) {
-	            String typeSymbole1 = avoirCarte.get(index1);
-	            String typeSymbole2 = getTypeSymbol();
-	            String typeSymbole3 = getTypeSymbol();
-	            // Same type
-	            if (typeSymbole1.equals(typeSymbole2) && typeSymbole1.equals(typeSymbole3)) {
-	                condition = true;
-	                // Different type
-	            } else if (!typeSymbole1.equals(typeSymbole2) && !typeSymbole1.equals(typeSymbole3) && !typeSymbole2.equals(typeSymbole3)) {
-	                condition = true;
-	                // One Joker and two of the same type symbol
-	            } else if ((typeSymbole1.equals("Joker") && typeSymbole2.equals(typeSymbole3)) ||
-	                    (typeSymbole2.equals("Joker") && typeSymbole1.equals(typeSymbole3)) ||
-	                    (typeSymbole3.equals("Joker") && typeSymbole1.equals(typeSymbole2))) {
-	                condition = true;
-	            }
-	        }
-	        return condition;
 	    }
 
 	    

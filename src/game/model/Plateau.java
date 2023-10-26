@@ -4,6 +4,7 @@ package game.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -488,6 +489,11 @@ public class Plateau extends AbstractModel {
 	public ArrayList<Carte> getDeck(){
 		return this.deck;
 	}
+
+	public int getNbEchange(){
+		return nbEchange;
+
+	}
 	
 	public int getNbTour() {
 		return nbTour;
@@ -531,10 +537,16 @@ public class Plateau extends AbstractModel {
 	}
 	
 	//------------------------Others--------------------------
-	public void Deck() {
+	public List<String> Deck() {
 		Carte carte = new Carte();
-		carte.combineLists();
+		List<String> combinedList = carte.combineLists();
+		for (String card : combinedList) {
+			System.out.println(card);
+		}
+		return combinedList;
 	}
+
+	
 	
 	public void nouveauTour() {
 		System.out.println("yes");
