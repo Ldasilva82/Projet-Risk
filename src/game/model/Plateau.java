@@ -166,7 +166,7 @@ public class Plateau extends AbstractModel {
 				Territoire gb = new Territoire("Grande-Bretagne");
 				gb.setType(TypeCase.GRANDEBRETAGNE);
 				listeTerritoires.add(gb);
-				Territoire europeOuest = new Territoire("Europe de l’Ouest");
+				Territoire europeOuest = new Territoire("Europe de l'Ouest");
 				europeOuest.setType(TypeCase.EUROPEOUEST);
 				listeTerritoires.add(europeOuest);
 				Territoire europeSud = new Territoire("Europe de Sud");
@@ -537,10 +537,9 @@ public class Plateau extends AbstractModel {
 	}
 	
 	public void nouveauTour() {
-		System.out.println("yes");
 		if (nbTour==0) {
 			this.setOrdreJoueur();
-			for (int i=1; i<5; i++) {
+			for (int i=1; i<25; i++) {
 				for (Joueur joueur : joueurs) {
 					this.placerRegiment(joueur);
 					
@@ -756,6 +755,7 @@ public class Plateau extends AbstractModel {
 //			Choix de la destination
 			//création d'une liste de destination possible en rechercheant les voisins des voisins 
 			//jusqu'a ce qu'il n'y ai plus de nouveaux ajouts
+			System.out.println("Vers quel territoire doivent partir les troupes?");
 			ArrayList<Territoire> destiPossible = new ArrayList<Territoire>();
 			for (Territoire voisin : territoireDepart.getTerritVoisins()) {
 				if (voisin.getProprietaire().equals(joueur)) {
