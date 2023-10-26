@@ -22,6 +22,8 @@ public class Plateau extends AbstractModel {
 		this.largeur = largeur;
 		this.nbTour = 0;
 		this.selectedTerritoire = null;
+		Joueur joueurProprioFactice = new Joueur("Lambert","Paul");
+		
 		
 		for(int y=0; y<this.getHauteur(); y++) {
 			for (int x=0; x<this.getLargeur(); x++) {
@@ -377,6 +379,7 @@ public class Plateau extends AbstractModel {
         plateau[17][10] = australieOrientale;
         plateau[17][11] = australieOrientale;
         
+        russie.setProprietaire(joueurProprioFactice);
       /*
        * /Création des continents 
       	continents = new Continent[6];
@@ -455,7 +458,6 @@ public class Plateau extends AbstractModel {
 			for (int i=1; i<5; i++) {
 				for (Joueur joueur : joueurs) {
 					this.placerRegiment(joueur);
-					
 				}
 			}
 			
@@ -479,8 +481,14 @@ public class Plateau extends AbstractModel {
 	    
 		// Init StringBuilder => pour construire une string complexe
 	    StringBuilder infoTerritoire = new StringBuilder();
+	    
 	    /// Ajout du nom terrriroire
 	    infoTerritoire.append("Territoire : \n ").append(selectedTerritoire.getNomTerritoire()).append("\n\n");
+	    
+	    /// Ajout du nb de régiment placé sur le territoire et nom du propriétaire
+	    infoTerritoire.append("Nb de régiment placéss : ").append(selectedTerritoire.getNbRegiments()).append("\n");
+	    infoTerritoire.append("Territoire occupé par : ").append(selectedTerritoire.getProprietaire().getPrenomJoueur()).append(" ").append(selectedTerritoire.getProprietaire().getNomJoueur()).append("\n\n");
+	    
 	    /// Ajout de la liste des pays voisons 
 	    infoTerritoire.append("Voisins :\n");
 	    for (Territoire territoire : selectedTerritoire.getTerritVoisins()) {

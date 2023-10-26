@@ -16,6 +16,7 @@ public class Territoire {
 		this.nbRegiment = 0;
 		this.joueurProprio = null; //voir si possible de ne pas mettre à null
 		
+		
 	}
 	
 	// Methods

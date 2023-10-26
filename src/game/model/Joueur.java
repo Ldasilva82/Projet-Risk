@@ -26,7 +26,12 @@ public class Joueur {
 	public int getNbDe1() {
 		return nbDe1;
 	}
-	
+	public String getPrenomJoueur() {
+		return prenomJoueur;
+	}
+	 public String getNomJoueur() {
+		 return nomJoueur;
+	 }
 	
 	/// Setters
 	public void setNbDe1(int nbDé1) {
