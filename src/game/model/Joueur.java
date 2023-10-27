@@ -7,6 +7,7 @@ public class Joueur {
 	// Attributes
 	protected String nomJoueur;
 	protected String prenomJoueur;
+	protected int numInscription;
 	protected int nbAttaqueReussie;
 	protected int nbDefenseReussie;
 	protected int nbDe1;
@@ -32,6 +33,10 @@ public class Joueur {
 
 	public String getPrenomJoueur() {
 		return prenomJoueur;
+	}
+	
+	public int getNumeroInscription() {
+		return numInscription;
 	}
 	
 	public int getNbDe1() {
