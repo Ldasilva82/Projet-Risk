@@ -54,7 +54,6 @@ public class Joueur {
 		return nbTerritoireConquis;
 	}
 	
-	
 	public ArrayList<Carte> getCartesPossedees() {
 		return this.cartePossedees;
 		
@@ -103,7 +102,7 @@ public class Joueur {
 			cartePossedees.add(carte);
 		}
 		
-		/// Méthode pour afficher les cartes du joueur
+	/// Méthode pour afficher les cartes du joueur
 		 public void afficherCartesPossedees() {
 		        System.out.println("Cartes possédées par " + getPrenomJoueur() + ":");
 		        for (Carte carte : cartePossedees) {
@@ -115,8 +114,6 @@ public class Joueur {
 		            }
 		        }
 		    }
-
-		
 
 		// Méthode pour échanger des cartes
 	    public void echangerCartes(List<Carte> cartesEnMain, Territoire territoire) {
@@ -166,7 +163,6 @@ public class Joueur {
 	    public boolean memeType(List<Carte> cartesEnMain) {
 	        if (cartesEnMain.size() != 3) {
 	            return false; // Il doit y avoir exactement 3 cartes pour cette combinaison
-	        }
 
 	        // Récupérer le type de la première carte
 	        TypeCarte premierType = cartesEnMain.get(0).getType();
@@ -180,9 +176,12 @@ public class Joueur {
 
 	        return true; // Toutes les cartes sont du même type
 	    }
+	    
+	    
+
 	    public boolean differentType(List<Carte> cartesEnMain) {
 	        if (cartesEnMain.size() != 3) {
-	            return false; // Il doit y avoir exactement 3 cartes pour cette combinaison
+	            return false; 
 	        }
 
 	        // Créer un ensemble (Set) pour stocker les types de cartes uniques
@@ -201,10 +200,10 @@ public class Joueur {
 
 	    public boolean typeJoker(List<Carte> cartesEnMain) {
 	        if (cartesEnMain.size() != 3) {
-	            return false; // Il doit y avoir exactement 3 cartes pour cette combinaison
+	            return false; 
 	        }
 
-	        // Créer un ensemble (Set) pour stocker les types de cartes uniques
+	        // Créer un ensemble (Set) pour stocker les types de cartes unique
 	        Set<TypeCarte> typesUniques = new HashSet<>();
 	        boolean aJoker = false;
 
