@@ -523,9 +523,11 @@ public class Plateau extends AbstractModel {
 //	méthode qui prend en paramètre le NomTerritoire et renvoit l'objet Territoire auquel il correspond
 	public Territoire trouverTerritoireParNom(String territoireChoisi) {
 		Territoire retour = null;
-		for (Territoire territoire : listeTerritoires) {
-			if (territoire.getNomTerritoire().equals(territoireChoisi)) {
-				retour = territoire;
+		if (territoireChoisi!=null) {
+			for (Territoire territoire : listeTerritoires) {
+				if (territoire.getNomTerritoire().equals(territoireChoisi)) {
+					retour = territoire;
+				}
 			}
 		}
 		return retour;
@@ -594,15 +596,22 @@ public class Plateau extends AbstractModel {
 	
 //	Cette méthode gère le placement des régiments d'un joueur
 	private void placerRegiment(Joueur joueur) {
+		ArrayList<Territoire> dispo = new ArrayList<Territoire>();
 		if (this.territoireLibre()) {
-			
 			System.out.println(joueur.getNomJoueur() + "Sélectionnez un territoire où ajouter un régiment:");
 			for (Territoire territoire : listeTerritoires) {
 				if (territoire.getProprietaire()==null) {
 					System.out.println(territoire.getNomTerritoire());
+					dispo.add(territoire);
 				}
 		    }
-			String territoireChoisi = this.scanner.nextLine();
+			String territoireChoisi = null;
+			while(!dispo.contains(trouverTerritoireParNom(territoireChoisi))) {
+				territoireChoisi = this.scanner.nextLine();
+				if (!dispo.contains(trouverTerritoireParNom(territoireChoisi))) {
+					System.out.println("Ce territoire n'est pas dans la liste ci dessus");
+				}
+			}
 			Territoire territoireSelectionne = trouverTerritoireParNom(territoireChoisi);
 			territoireSelectionne.setProprietaire(joueur);
 			territoireSelectionne.setNbRegiment("+", 1);
@@ -613,9 +622,16 @@ public class Plateau extends AbstractModel {
 			for (Territoire territoire : listeTerritoires) {
 				if (territoire.getProprietaire().equals(joueur)) {
 					System.out.println(territoire.getNomTerritoire());
+					dispo.add(territoire);
 				}
 		    }
-			String territoireChoisi = this.scanner.nextLine();
+			String territoireChoisi = null;
+			while(!dispo.contains(trouverTerritoireParNom(territoireChoisi))) {
+				territoireChoisi = this.scanner.nextLine();
+				if (!dispo.contains(trouverTerritoireParNom(territoireChoisi))) {
+					System.out.println("Ce territoire n'est pas dans la liste ci dessus");
+				}
+			}
 			Territoire territoireSelectionne = trouverTerritoireParNom(territoireChoisi);
 			territoireSelectionne.setNbRegiment("+", 1);
 			
@@ -652,7 +668,8 @@ public class Plateau extends AbstractModel {
 		
 //****
 		//Si besoin ajouter les echanges de carte ici
-//****		
+//****	
+		System.out.println(joueur.getNomJoueur() +" vous avez recu "+troupeRecu+"régiments a placer");
 		for (int i=0; i<troupeRecu; i++) {
 			this.placerRegiment(joueur);
 		}
@@ -673,12 +690,18 @@ public class Plateau extends AbstractModel {
 		}
 		if (possibilite!=0) {
 			//		choix attaque ou pas
+			String choixAttaque = "string";
 			System.out.println(joueur.getNomJoueur() + "Voulez vous effectuer une attaque? Oui/Non");
-			String choixAttaque = this.scanner.nextLine();
-
+			while (!choixAttaque.equals("Oui") && !choixAttaque.equals("Non")) {
+				choixAttaque = this.scanner.nextLine();
+				if (!choixAttaque.equals("Oui") && !choixAttaque.equals("Non")) {
+					System.out.println("Répondez par 'Oui' ou par 'Non'");
+				}
+			}
 			//		Cas ou le joueur répond Oui
 			if (choixAttaque.equals("Oui")) {
 				//			choix attaquant
+				ArrayList<Territoire> dispo = new ArrayList<Territoire>();
 				System.out.println(joueur.getNomJoueur() + "Lequel de vos territoires passe a l'attaque?");
 				//on propose tous les territoires disposant d'assez de régiments pour une attaque
 				//et ayant des territoires non possédés parmis les voisins
@@ -687,27 +710,43 @@ public class Plateau extends AbstractModel {
 						if (cibleDispo(territoire, joueur)) {
 							if (territoire.getNbRegiments()>=2) {
 								System.out.println(territoire.getNomTerritoire());
+								dispo.add(territoire);
 							}
 						}
 					}
 				}
 				//le joueur attaquant choisi son territoireAttaquant
-				String choixAttaquant = this.scanner.nextLine();
+				String choixAttaquant = null;
+				while(!dispo.contains(trouverTerritoireParNom(choixAttaquant))) {
+					choixAttaquant = this.scanner.nextLine();
+					if (!dispo.contains(trouverTerritoireParNom(choixAttaquant))) {
+						System.out.println("Ce territoire n'est pas dans la liste ci dessus");
+					}
+				}
 				Territoire territoireAttaquant = trouverTerritoireParNom(choixAttaquant);
 
 				//			choix cible
 				//on propose les territoires voisins non possédés
+				ArrayList<Territoire> cibles = new ArrayList<Territoire>();
 				System.out.println(joueur.getNomJoueur() + "Quelle est votre cible?");
 				for (Territoire terr : territoireAttaquant.getTerritVoisins() ) {
 					if (terr.getProprietaire().equals(joueur)) {
 					}
 					else {
 						System.out.println(terr.getNomTerritoire());
+						cibles.add(terr);
 					}
 				}
 				//le joueur attaquant choisit le territoireCible
-				String choixCible = this.scanner.nextLine();
+				String choixCible = null;
+				while(!cibles.contains(trouverTerritoireParNom(choixCible))) {
+					choixCible = this.scanner.nextLine();
+					if (!cibles.contains(trouverTerritoireParNom(choixCible))) {
+						System.out.println("Ce territoire n'est pas dans la liste ci dessus");
+					}
+				}
 				Territoire territoireCible = trouverTerritoireParNom(choixCible);
+				
 				//le propriétaire de territoireCible est stocké dans "defenseur"
 				Joueur defenseur = territoireCible.getProprietaire();
 
@@ -726,8 +765,15 @@ public class Plateau extends AbstractModel {
 					}
 				}
 				else if (territoireAttaquant.getNbRegiments()==3) {
+					int numAttaquant = 0;
 					System.out.println(joueur.getNomJoueur() + "combien de regiments se battront? 1/2");
-					choixNb = this.scanner.nextLine();
+					while (numAttaquant < 1 || numAttaquant > 2) {
+						choixNb = this.scanner.nextLine();
+						numAttaquant = Integer.parseInt(choixNb);
+						if (numAttaquant < 1 || numAttaquant > 2) {
+							System.out.println("Veuillez sélectionner un nombre correct");
+						}
+					}
 				}
 				else if (territoireAttaquant.getNbRegiments()==2) {
 					choixNb = "1";
@@ -740,8 +786,15 @@ public class Plateau extends AbstractModel {
 				String choixNbDefense = null;
 				//On propose différents choix selon le nombre de régiments a disposition
 				if (territoireCible.getNbRegiments()>=2) {
+					int numDefenseur = 0;
 					System.out.println(defenseur.getNomJoueur() + "combien de regiments se battront? 1/2");
-					choixNbDefense = this.scanner.nextLine();
+					while (numDefenseur < 1 || numDefenseur > 2) {
+						choixNbDefense = this.scanner.nextLine();
+						numDefenseur = Integer.parseInt(choixNbDefense);
+						if (numDefenseur < 1 || numDefenseur > 2) {
+							System.out.println("Veuillez sélectionner un nombre correct");
+						}
+					}
 				}
 				else {
 					choixNbDefense = "1";
@@ -794,6 +847,7 @@ public class Plateau extends AbstractModel {
 					}
 					//cas ou c'était le dernier régiment en défense
 					else {
+						System.out.println("Vous avez conquis "+ territoireCible.getNomTerritoire());
 						territoireCible.setProprietaire(joueur);
 						territoireAttaquant.setNbRegiment("-", 1);
 						gagnant.setNbTerritoireConquis(gagnant.getNbTerritoireConquis()+1);
@@ -801,6 +855,7 @@ public class Plateau extends AbstractModel {
 						//piocher carte
 						//*					
 						if (joueurOut(defenseur)) {
+							System.out.println("le joueur " +defenseur.getNomJoueur()+ " " + defenseur.getPrenomJoueur() + " est éliminé");
 							joueurElimine.add(defenseur);
 
 							//*						
@@ -844,7 +899,13 @@ public class Plateau extends AbstractModel {
 		if (possibilite!=0) {
 			//choix deplacement ou pas
 			System.out.println(joueur.getNomJoueur() + "Voulez vous deplacer des regiments? Oui/Non");
-			String choixDeplacement = this.scanner.nextLine();
+			String choixDeplacement = "string";
+			while (!choixDeplacement.equals("Oui") && !choixDeplacement.equals("Non")) {
+				choixDeplacement = this.scanner.nextLine();
+				if (!choixDeplacement.equals("Oui") && !choixDeplacement.equals("Non")) {
+					System.out.println("Répondez par 'Oui' ou par 'Non'");
+				}
+			}
 			//		Cas ou le joueur répond Oui
 			if (choixDeplacement.equals("Oui")) {	
 				//choix du territoire de départ
@@ -878,7 +939,7 @@ public class Plateau extends AbstractModel {
 					ArrayList<Territoire> aAjouter = new ArrayList<Territoire>();
 					for (Territoire territoire : destiPossible) {
 						for (Territoire voisin : territoire.getTerritVoisins()) {
-							if (voisin.getProprietaire().equals(joueur) && !destiPossible.contains(voisin)) {
+							if (voisin.getProprietaire().equals(joueur) && !destiPossible.contains(voisin) && !voisin.equals(territoireDepart)) {
 								if (!aAjouter.contains(voisin)) {
 									aAjouter.add(voisin);
 									ajout=ajout+1;
