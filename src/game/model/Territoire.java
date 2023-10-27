@@ -17,7 +17,6 @@ public class Territoire {
 		this.joueurProprio = null; //voir si possible de ne pas mettre à null
 		
 	}
-	
 	// Methods
 	///Getters
 	public String getNomTerritoire() {
@@ -47,13 +46,8 @@ public class Territoire {
 		this.nomTerritoire = nomTerrit;
 	}
 	
-	public void setNbRegiment(String signe, int nombre) {
-		if(signe.equals("+")) {
-    		nbRegiment = nbRegiment + nombre;
-    	}
-    	else if (signe.equals("-") && nombre<nbRegiment) {
-    		nbRegiment = nbRegiment - nombre;
-    	}
+	public int setNbRegiment(int nombre) {
+		return this.nbRegiment = nombre;
 	}
 	
 	public void setProprietaire(Joueur proprietaire) {
@@ -65,6 +59,9 @@ public class Territoire {
 	public void setType(TypeCase type) {
 		this.type = type;
 	}
+	 public void ajouterRegiments(int nbRegiment) {
+	        this.nbRegiment += nbRegiment;
+	    }
 	
 	//public TypeTerritoire setTypeTerritoire(TypeTerritoire type) {
     	//return this.typeTerritoire = type};

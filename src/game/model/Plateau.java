@@ -1,12 +1,15 @@
 package game.model;
 
 
+//import java.nio.channels.SelectableChannel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
+
+import game.vue.Vue;
 
 public class Plateau extends AbstractModel {
 	// Attributes
@@ -17,9 +20,9 @@ public class Plateau extends AbstractModel {
 	protected int largeur;
 	protected int nbTour;
 	protected Territoire selectedTerritoire;
-	private Continent continent;
-	private int nbEchange;
-	private ArrayList<Carte> deck;
+	//private Continent continent;
+	public int nbEchange;
+	private ArrayList<Carte> deck = new ArrayList<>();
 	protected Scanner scanner;
 
 	// Constructor
@@ -449,7 +452,29 @@ public class Plateau extends AbstractModel {
         europe.setTerritoiresList(new Territoire[] {islande, gb, europeOuest, europeSud, europeNord, scandinavie, russie});
         australie.setTerritoiresList(new Territoire[] {indonesie, nouvGuinee, australieOccidentale, australieOrientale});
         
+      /// DECK DE CARTES
+        // Liste des territoires et leurs types
+           String[] territoiresInfanterie = {"Islande", "Kamchatka", "Mongolie", "Chine", "Moyen-Orient", "Asie du Sud-Est", "Nouvelle Guinée", "Egypte", "Afrique Orientale", "Afrique Centrale", "Alaska", "Venezuela", "Pérou", "Argentine"};
+           String[] territoiresArtillerie = {"Grande-Bretagne", "Europe de l'Ouest", "Europe du Sud", "Europe du Nord", "Japon", "Indonésie", "Australie Occidentale", "Australie Orientale", "Afrique du Sud", "Territoires du Nord-Ouest", "Etats-Unis de l'Ouest", "Etats-Unis de l'Est", "Amerique Centrale", "Brésil"};
+           String[] territoiresCavalerie = {"Scandinavie", "Russie", "Oural", "Sibérie", "Yakoutie", "Irkoutsk", "Afghanistan", "Inde", "Afrique du Nord", "Madagascar", "Groenland", "Alberta", "Ontario", "Canada de l'Est"};
 
+           // Créer les cartes pour les territoires de chaque type
+           for (String territoire : territoiresInfanterie) {
+               deck.add(new CarteTerritoire(new Territoire(territoire), TypeCarte.INFANTERIE));
+           }
+           for (String territoire : territoiresArtillerie) {
+               deck.add(new CarteTerritoire(new Territoire(territoire), TypeCarte.ARTILLERIE));
+           }
+           for (String territoire : territoiresCavalerie) {
+               deck.add(new CarteTerritoire(new Territoire(territoire), TypeCarte.CAVALERIE));
+           }
+           // Créer les cartes Joker
+           for (int i = 0; i < 2; i++) {
+               deck.add(new CarteJoker());
+           }
+
+           // Mélanger le deck de cartes
+           Collections.shuffle(deck);
 	}
 	
 	
@@ -459,6 +484,9 @@ public class Plateau extends AbstractModel {
 		return joueurs;
 	}
 	
+	public int getNbEchange() {
+		return nbEchange;
+	}
 	public int getHauteur() {
 		return hauteur;
 	}
@@ -487,6 +515,10 @@ public class Plateau extends AbstractModel {
 	
 	public ArrayList<Carte> getDeck(){
 		return this.deck;
+	}
+	public int getNbEchanges() {
+		
+		return this.nbEchange;
 	}
 	
 	public int getNbTour() {
@@ -531,10 +563,15 @@ public class Plateau extends AbstractModel {
 	}
 	
 	//------------------------Others--------------------------
-	public void Deck() {
-		Carte carte = new Carte();
-		carte.combineLists();
-	}
+	// Méthode pour piocher une carte du deck
+		public Carte piocherCarte(Joueur joueur) {
+	        if (!deck.isEmpty()) {
+	            Carte cartePiochee = deck.remove(0);
+	            joueur.ajouterCartePiochee(cartePiochee);
+	            return cartePiochee;
+	        }
+	        return null; 
+	    }
 	
 	public void nouveauTour() {
 		System.out.println("yes");
@@ -571,7 +608,7 @@ public class Plateau extends AbstractModel {
 			String territoireChoisi = this.scanner.nextLine();
 			Territoire territoireSelectionne = trouverTerritoireParNom(territoireChoisi);
 			territoireSelectionne.setProprietaire(joueur);
-			territoireSelectionne.setNbRegiment("+", 1);
+			territoireSelectionne.nbRegiment++;
 
 		} 
 		else {
@@ -583,7 +620,7 @@ public class Plateau extends AbstractModel {
 		    }
 			String territoireChoisi = this.scanner.nextLine();
 			Territoire territoireSelectionne = trouverTerritoireParNom(territoireChoisi);
-			territoireSelectionne.setNbRegiment("+", 1);
+			territoireSelectionne.nbRegiment++;
 			
 		}
 	}
@@ -696,24 +733,23 @@ public class Plateau extends AbstractModel {
 			
 //			changer regiment en conséquence
 			if (gagnant.equals(defenseur)) {
-				territoireAttaquant.setNbRegiment("-", 1);
+				territoireAttaquant.nbRegiment--;
 			}
 			else if (gagnant.equals(joueur)) {
 				//cas ou il reste des régiments en défense
 				if (territoireCible.getNbRegiments()>1) {
-					territoireCible.setNbRegiment("-", 1);
+					territoireCible.nbRegiment--;
 				}
 				//cas ou c'était le dernier régiment en défense
 				else {
 					territoireCible.setProprietaire(joueur);
-					territoireAttaquant.setNbRegiment("-", 1);
+					territoireAttaquant.nbRegiment--;
 					gagnant.setNbTerritoireConquis(gagnant.getNbTerritoireConquis()+1);
-//*
-					//piocher carte
+					joueur.piocher();
 //*					
 					if (joueurOut(defenseur)) {
-//*						
-						//récupérer carte du defenseur
+					//joueur.cartePossedees.add(defenseur.cartePossedees);
+						
 //*						
 					}
 					
@@ -786,27 +822,36 @@ public class Plateau extends AbstractModel {
 			String choixNbTroupe = this.scanner.nextLine();
 			int numTroupe = Integer.parseInt(choixNbTroupe);
 			
-//			déplacement des troupes
-			territoireDepart.setNbRegiment("-", numTroupe);
-			territoireArrivee.setNbRegiment("+", numTroupe);
+//			int nbTroupeDeplacees = Math.min(numTroupe, territoireDepart.getNbRegiments() - 1);
+			territoireDepart.setNbRegiment(territoireDepart.getNbRegiments() - numTroupe);
+			territoireArrivee.setNbRegiment(territoireArrivee.getNbRegiments() + numTroupe);
 		}
 	}
 
 	public void afficherInfoSelectedTerr(int x, int y) {
 		selectedTerritoire = this.plateau[x][y];
 	    
-		// Init StringBuilder => pour construire une string complexe
-	    StringBuilder infoTerritoire = new StringBuilder();
-	    /// Ajout du nom terrriroire
-	    infoTerritoire.append("Territoire : \n ").append(selectedTerritoire.getNomTerritoire()).append("\n\n");
-	    /// Ajout de la liste des pays voisons 
-	    infoTerritoire.append("Voisins :\n");
-	    for (Territoire territoire : selectedTerritoire.getTerritVoisins()) {
-	        infoTerritoire.append(territoire.getNomTerritoire()).append("\n");
-	    }
+		if(selectedTerritoire.getType() != TypeCase.MER) {
+			// Init StringBuilder => pour construire une string complexe
+		    StringBuilder infoTerritoire = new StringBuilder();
+		    /// Ajout du nom terrriroire
+		    infoTerritoire.append("Territoire : \n ").append(selectedTerritoire.getNomTerritoire()).append("\n\n");
+		    /// Ajout du nb de régiment :
+		    infoTerritoire.append("Nombre de régiment : ").append(selectedTerritoire.getNbRegiments()).append("/n");
+		    if (selectedTerritoire.getProprietaire() != null) {
+		    	/// Ajout du joueur propriétaire
+			    infoTerritoire.append("Joueur propriétaire : ").append(selectedTerritoire.getProprietaire().getPrenomJoueur());
+		    }
+		    
+		    /// Ajout de la liste des pays voisons 
+		    infoTerritoire.append("Voisins :\n");
+		    for (Territoire territoire : selectedTerritoire.getTerritVoisins()) {
+		        infoTerritoire.append(territoire.getNomTerritoire()).append("\n");
+		    }
 
-	    JOptionPane.showMessageDialog(null, infoTerritoire.toString(), "Informations du territoire", JOptionPane.INFORMATION_MESSAGE);
-	}
+		    JOptionPane.showMessageDialog(null, infoTerritoire.toString(), "Informations du territoire", JOptionPane.INFORMATION_MESSAGE);
+		}
+		}
 	
 
 //	méthode renvoyant true si au moins un territoire voisin appartient a un autre joueur 
@@ -889,5 +934,18 @@ public class Plateau extends AbstractModel {
 			return false;
 		}
 	}
+
+
+	public void setVue(Vue v) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 	
-}
+	}
+
+
+	
+	
+

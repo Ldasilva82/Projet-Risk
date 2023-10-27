@@ -1,7 +1,10 @@
 package game.model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.Set;
+import java.util.HashSet;
 
 public class Joueur {
 	// Attributes
@@ -12,7 +15,7 @@ public class Joueur {
 	protected int nbDe1;
 	protected int nbTerritoireConquis;
 	private Plateau plateau;
-	private ArrayList<Carte> cartePossedee;
+	public ArrayList<Carte> cartePossedees;
 	
 	// Constructor
 	public Joueur(String nom, String prenom) {
@@ -22,6 +25,7 @@ public class Joueur {
 		this.nbDefenseReussie = 0;
 		this.nbDe1 = 0;
 		this.nbTerritoireConquis = 0;
+		this.cartePossedees = new ArrayList<Carte>(); 
 	}
 	
 	// Methods
@@ -53,7 +57,7 @@ public class Joueur {
 	}
 	
 	public ArrayList<Carte> getCartePossedee(){
-		return this.cartePossedee;
+		return this.cartePossedees;
 	}
 	
 	/// Setters
@@ -87,10 +91,138 @@ public class Joueur {
 		//recupérer la carte situé en première position du deck de plateau 
 		Carte premiereCarte = plateau.getDeck().get(0);
 		//l'ajouter à la liste cartePossedee
-		cartePossedee.add(premiereCarte);
+		cartePossedees.add(premiereCarte);
 		//la retirer du deck de plateau
 		plateau.getDeck().remove(0);
 	}
+
+	/// Méthode pour ajouter une carte piochée à sa main
+		public void ajouterCartePiochee(Carte carte) {
+			cartePossedees.add(carte);
+		}
+		
+		/// Méthode pour afficher les cartes du joueur
+		 public void afficherCartesPossedees() {
+		        System.out.println("Cartes possédées par " + getPrenomJoueur() + ":");
+		        for (Carte carte : cartePossedees) {
+		            if (carte instanceof CarteTerritoire) {
+		                CarteTerritoire carteTerritoire = (CarteTerritoire) carte;
+		                System.out.println("Territoire: " + carteTerritoire.getTerritoire().getNomTerritoire() + ", Type: " + carte.getType());
+		            } else {
+		                System.out.println("Joker, Type: " + carte.getType());
+		            }
+		        }
+		    }
+
+		public ArrayList<Carte> getCartesPossedees() {
+			return this.cartePossedees;
+			
+		}
+
+		// Méthode pour échanger des cartes
+	    public void echangerCartes(List<Carte> cartesEnMain, Territoire territoire) {
+	        if (cartesEnMain.size() >= 3) {
+	            if (memeType(cartesEnMain) || differentType(cartesEnMain) || typeJoker(cartesEnMain)) {
+	                int nbRegiment = 0;
+	                switch (plateau.getNbEchange()) {
+	                    case 0:
+	                        nbRegiment = 4;
+	                        break;
+	                    case 1:
+	                        nbRegiment = 6;
+	                        break;
+	                    case 2:
+	                        nbRegiment = 8;
+	                        break;
+	                    case 3:
+	                        nbRegiment = 10;
+	                        break;
+	                    case 4:
+	                        nbRegiment = 12;
+	                        break;
+	                    case 5:
+	                        nbRegiment = 15;
+	                        break;
+	                    default:
+	                        nbRegiment = 15 + 5 * (plateau.getNbEchange() - 2); // +5 régiments pour chaque échange au-delà du 3ème
+	                        break;
+	                }
+	                // Ajouter régiments au joueur
+	                territoire.ajouterRegiments(nbRegiment);
+	                
+	                // Vérifier si le joueur échange une carte de territoire dont il est propriétaire
+	                for (Carte carte : cartesEnMain) {
+	                	if (carte instanceof CarteTerritoire && ((CarteTerritoire) carte).getTerritoire() == territoire) {
+	                        territoire.ajouterRegiments(2);
+	                    }
+	                }
+	                plateau.nbEchange++;
+	            } else {
+	                System.out.println("Combinaison de cartes invalide.");
+	            }
+	        } else {
+	            System.out.println("Vous devez avoir au moins 3 cartes pour effectuer un échange.");
+	        }
+	    }
+	    public boolean memeType(List<Carte> cartesEnMain) {
+	        if (cartesEnMain.size() != 3) {
+	            return false; // Il doit y avoir exactement 3 cartes pour cette combinaison
+	        }
+
+	        // Récupérer le type de la première carte
+	        TypeCarte premierType = cartesEnMain.get(0).getType();
+
+	        // Vérifier que les types des deux autres cartes correspondent
+	        for (int i = 1; i < 3; i++) {
+	            if (cartesEnMain.get(i).getType() != premierType) {
+	                return false; // Au moins une carte est d'un type différent
+	            }
+	        }
+
+	        return true; // Toutes les cartes sont du même type
+	    }
+	    public boolean differentType(List<Carte> cartesEnMain) {
+	        if (cartesEnMain.size() != 3) {
+	            return false; // Il doit y avoir exactement 3 cartes pour cette combinaison
+	        }
+
+	        // Créer un ensemble (Set) pour stocker les types de cartes uniques
+	        Set<TypeCarte> typesUniques = new HashSet<>();
+
+	        for (Carte carte : cartesEnMain) {
+	            TypeCarte type = carte.getType();
+	            if (typesUniques.contains(type)) {
+	                return false; // Au moins une carte a un type déjà présent
+	            }
+	            typesUniques.add(type);
+	        }
+
+	        return true; // Les trois cartes sont de types différents
+	    }
+
+	    public boolean typeJoker(List<Carte> cartesEnMain) {
+	        if (cartesEnMain.size() != 3) {
+	            return false; // Il doit y avoir exactement 3 cartes pour cette combinaison
+	        }
+
+	        // Créer un ensemble (Set) pour stocker les types de cartes uniques
+	        Set<TypeCarte> typesUniques = new HashSet<>();
+	        boolean aJoker = false;
+
+	        for (Carte carte : cartesEnMain) {
+	            TypeCarte type = carte.getType();
+	            if (type == TypeCarte.JOKER) {
+	                aJoker = true;
+	            } else {
+	                if (typesUniques.contains(type)) {
+	                    return false; // Au moins une carte a un type déjà présent
+	                }
+	                typesUniques.add(type);
+	            }
+	        }
+
+	        return aJoker; // Les trois cartes sont de types différents et il y a un Joker
+	    }
 
 	
 //	public static void main(String[] args) {

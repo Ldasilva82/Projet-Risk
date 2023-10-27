@@ -13,7 +13,11 @@ import java.awt.Graphics2D;
  * @author Lucas, Pauline, Alex, Ravaka, Yaning
  */
 public class PanelJeu extends javax.swing.JPanel {
-    private Vue fenetre;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Vue fenetre;
     private Graphics cg;
     
     public PanelJeu(Vue fenetre) {
