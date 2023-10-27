@@ -86,21 +86,23 @@ public class Joueur {
 	    }
 	    return value;
 	}
+	/// Méthode pour ajouter une carte piochée ses cartesPossédées
+			public void ajouterCartePiochee(Carte carte) {
+				cartePossedees.add(carte);
+			}
 	
 	//Methode pour piocher une carte
 	public void piocher() {
 		//recupérer la carte situé en première position du deck de plateau 
 		Carte premiereCarte = plateau.getDeck().get(0);
+		System.out.println("Vous avez pioché la carte : " + premiereCarte);
 		//l'ajouter à la liste cartePossedee
 		cartePossedees.add(premiereCarte);
 		//la retirer du deck de plateau
 		plateau.getDeck().remove(0);
 	}
 
-	/// Méthode pour ajouter une carte piochée ses cartesPossédées
-		public void ajouterCartePiochee(Carte carte) {
-			cartePossedees.add(carte);
-		}
+	
 		
 	/// Méthode pour afficher les cartes du joueur
 		 public void afficherCartesPossedees() {
@@ -116,7 +118,7 @@ public class Joueur {
 		    }
 
 		// Méthode pour échanger des cartes
-	    public void echangerCartes(List<Carte> cartesEnMain, Territoire territoire) {
+	    public void echangerCartes(ArrayList<Carte> cartesEnMain, Territoire territoire) {
 	        if (cartesEnMain.size() >= 3) {
 	            if (/*memeType(cartesEnMain)||*/  differentType(cartesEnMain) || typeJoker(cartesEnMain)) {
 	                int nbRegiment = 0;

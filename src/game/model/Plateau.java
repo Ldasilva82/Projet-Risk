@@ -4,7 +4,6 @@ package game.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -685,9 +684,7 @@ public class Plateau extends AbstractModel {
 			}
 		}
 		
-//****
-		//Si besoin ajouter les echanges de carte ici
-//****	
+		joueur.echangerCartes(joueur.cartePossedees, selectedTerritoire);
 		System.out.println(joueur.getNomJoueur() +" vous avez recu "+troupeRecu+"régiments a placer");
 		for (int i=0; i<troupeRecu; i++) {
 			this.placerRegiment(joueur);
@@ -871,7 +868,7 @@ public class Plateau extends AbstractModel {
 						territoireAttaquant.setNbRegiment("-", 1);
 						gagnant.setNbTerritoireConquis(gagnant.getNbTerritoireConquis()+1);
 						//*
-						//piocher carte
+						joueur.piocher();
 						//*					
 						if (joueurOut(defenseur)) {
 							System.out.println("le joueur " +defenseur.getNomJoueur()+ " " + defenseur.getPrenomJoueur() + " est éliminé");

@@ -3,13 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game;
 
-import game.controler.AbstractControler;
-import game.controler.Controler;
-import game.model.AbstractModel;
-import game.model.Plateau;
-import game.vue.Vue;
 
 /**
  *
@@ -18,16 +12,21 @@ import game.vue.Vue;
 
 
 
-import game.controler.Controler;
 
+package game;
+
+
+import game.controler.Controler;
+import game.model.Plateau;
+import game.vue.Vue;
 import game.model.Carte;
 import game.model.CarteJoker;
 import game.model.CarteTerritoire;
 import game.model.TypeCarte;
 import game.model.Joueur;
-import game.model.Plateau;
+
 import game.model.Territoire;
-import game.vue.Vue;
+
 
 /**
  *
