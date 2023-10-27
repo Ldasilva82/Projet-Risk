@@ -56,13 +56,13 @@ public class GAME {
                 Joueur joueurBD = new Joueur(nomJoueur,prenomJoueur);
                 joueurBD.setNumInscription(idInscription);
                 model.getOrdreJoueur().add(joueurBD);
-                System.out.println("Affectation des joueurs effectuée");
+                System.out.println("Affectation du joueur "+ joueurBD.getNumeroInscription() +" effectuée");
             }
             
-            while(model.partieTerminer()){
-            	System.out.println("yes");
-                controler.calculerStepSuivant();
-            }
+//            while(model.partieTerminer()){
+//            	System.out.println("yes");
+//                controler.calculerStepSuivant();
+//            }
             
             Timestamp finPartie = new Timestamp(System.currentTimeMillis());
             
@@ -72,8 +72,9 @@ public class GAME {
             			+ "DefenseReussie = " + joueur.getNbDefenseReussie() + ", "
             			+ "DeUn = " + joueur.getNbDe1() +", "
             			+ "TerritoireConquis = " + joueur.getNbTerritoireConquis()
-            		+ " Where IDinscription = " + joueur.getNumeroInscription();
-                stmt.executeUpdate(sql);
+            		+ " WHERE IDinscription = " + joueur.getNumeroInscription();
+            	int updateJoueur = stmt.executeUpdate(sql);
+                System.out.println( updateJoueur + " update pour joueur : " + joueur.getNomJoueur());
                 
                 //Pour le score : code en attente de getJoueurElimine()
 //                int scoreObtenu = 0;
@@ -84,15 +85,19 @@ public class GAME {
 //                		+ "SET score = " + scoreObtenu + ", "
 //                		+ "WHERE IDPartie = " + nbPartie + ", "
 //                		+ "and IDJoueur = " + joueur.getNumeroInscription();
-//                	stmt.executeUpdate(sql);
+//                		int updateParticiper = stmt.executeUpdate(sql);
+//                		System.out.println(updateParticiper 
+//                				+ " update pour participer : score de " + joueur.getNomJoueur().concat(" "+joueur.getPrenomJoueur())
+//                				+ " (" + scoreObtenu + " points)");
 //                	}
 //               }
             }
             
-            sql = "Update partie "
-            		+ "Set DateFinPartie = " + finPartie
-            		+ " Where IDPartie = " + nbPartie;
-            stmt.executeUpdate(sql);
+            sql = "UPDATE partie "
+            		+ "SET DateFinPartie = '" + finPartie+ "' "
+            		+ "WHERE IDPartie = " + nbPartie;
+            int updatePartie = stmt.executeUpdate(sql);
+            System.out.println(updatePartie + " update pour partie");            
             /**
              * Fermer les connexions ouvertes de la BD.
              */
