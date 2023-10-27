@@ -12,7 +12,7 @@ import game.vue.observer.Observateur;
 
 /**
  *
- * @author david
+ * @author Lucas, Alex, Pauline, ravaka, Yaning
  */
 public abstract class AbstractModel implements Observable {
     private ArrayList<Observateur> observateurs;
@@ -22,11 +22,9 @@ public abstract class AbstractModel implements Observable {
     }
     
     
-    public abstract void nouveauTour();
-    
+    public abstract void nouveauTour();   
     public abstract TypeCase getTypeCase(int x, int y);
     public abstract void setTypeCase(int x, int y,TypeCase tc);
-    //public abstract Joueur getAnimalPlusFort(int x, int y);
     public abstract boolean partieTerminer();
     public abstract void afficherInfoSelectedTerr(int x, int y);
 	public abstract int getLargeur();
@@ -47,8 +45,5 @@ public abstract class AbstractModel implements Observable {
     public void addObservateur(Observateur o){
         observateurs.add(o);
     }
-
-
-
-    
+  
 }

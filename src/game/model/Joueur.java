@@ -46,18 +46,18 @@ public class Joueur {
 		return nbAttaqueReussie;
 	}
 
-
 	public int getNbDefenseReussie() {
 		return nbDefenseReussie;
 	}
-
 
 	public int getNbTerritoireConquis() {
 		return nbTerritoireConquis;
 	}
 	
-	public ArrayList<Carte> getCartePossedee(){
+	
+	public ArrayList<Carte> getCartesPossedees() {
 		return this.cartePossedees;
+		
 	}
 	
 	/// Setters
@@ -77,7 +77,8 @@ public class Joueur {
 		this.nbTerritoireConquis = nbTerritoireConquis;
 	}
 	
-	/// Others
+	/// GAME
+	//Methode pour lancé les des
 	public int lancerDes() {
 		Random random = new Random();
 	    int value = random.nextInt((6 - 1) + 1) + 1;
@@ -87,6 +88,7 @@ public class Joueur {
 	    return value;
 	}
 	
+	//Methode pour piocher une carte
 	public void piocher() {
 		//recupérer la carte situé en première position du deck de plateau 
 		Carte premiereCarte = plateau.getDeck().get(0);
@@ -96,7 +98,7 @@ public class Joueur {
 		plateau.getDeck().remove(0);
 	}
 
-	/// Méthode pour ajouter une carte piochée à sa main
+	/// Méthode pour ajouter une carte piochée ses cartesPossédées
 		public void ajouterCartePiochee(Carte carte) {
 			cartePossedees.add(carte);
 		}
@@ -114,10 +116,7 @@ public class Joueur {
 		        }
 		    }
 
-		public ArrayList<Carte> getCartesPossedees() {
-			return this.cartePossedees;
-			
-		}
+		
 
 		// Méthode pour échanger des cartes
 	    public void echangerCartes(List<Carte> cartesEnMain, Territoire territoire) {

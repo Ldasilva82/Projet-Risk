@@ -22,23 +22,20 @@ import game.vue.observer.Observateur;
 
 /**
  *
- * @author david
+ * @author Pauline, Alex, Lucas, Ravaka, Yaning
  */
 public class Vue extends javax.swing.JFrame implements Observateur{
 
     /**
 	 * 
 	 */
+	// Attributes
 	private static final long serialVersionUID = 1L;
 	private AbstractModel model;
     private MouseListener mouseListener;
-    //private AbstractControler controler;
     private Plateau plateauFactice;
-   
     
-    //private PanelJeu panelJeu; // // 
-
-  
+    // Constructor
     /**
      * Creates new form 
      * @param model
@@ -51,11 +48,11 @@ public class Vue extends javax.swing.JFrame implements Observateur{
         this.mouseListener = new MouseListener(controler);
         this.panelJeu.addMouseListener(this.mouseListener);
         this.plateauFactice = new Plateau(19, 14);
-        //Territoire territoire = new Territoire("Alaska");
-        //Carte carteTerritoire = new CarteTerritoire(territoire, TypeCarte.ARTILLERIE);
-        //Carte carteJoker = new CarteJoker();
+        
     }
     
+    // Methods
+    /// Methode pour dessiner le plateau de jeu
     public void dessinerJeu(){
         int h = this.panelJeu.getWidth();
         int l = this.panelJeu.getHeight();
@@ -237,6 +234,7 @@ public class Vue extends javax.swing.JFrame implements Observateur{
     
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    //Methodes pour initialiser les composants
     private void initComponents() {
     	
         labelJoueur = new javax.swing.JLabel();
@@ -247,16 +245,14 @@ public class Vue extends javax.swing.JFrame implements Observateur{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         
         labelJoueur.setText("Joueur : " );
-
-        nbEchanges.setText("Nombre d'échange" );
-
-        
+        nbEchanges.setText("Nombre d'échange" );       
         cartesDuJoueur.setText("acrtes");
-
+        
+        // Init un gestionnaire d'interface avec GroupLayout
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
 
-     // Définissez la disposition verticale
+     // disposition verticale
         layout.setHorizontalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addComponent(labelJoueur)
@@ -265,7 +261,7 @@ public class Vue extends javax.swing.JFrame implements Observateur{
                 .addComponent(panelJeu)
         );
 
-        // Définissez la disposition horizontale
+        // disposition horizontale
         layout.setVerticalGroup(
             layout.createSequentialGroup()
                 .addComponent(labelJoueur)
@@ -274,11 +270,12 @@ public class Vue extends javax.swing.JFrame implements Observateur{
                 .addComponent(panelJeu)
         );
 
-        // Appelez pack() pour ajuster automatiquement la taille de la fenêtre
+        
         pack();
     
     }// </editor-fold>//GEN-END:initComponents
 
+    /// Methode pour afficher les info de la partie dans les composants
    public void afficherInfoJoueur(Joueur joueur, Vue vue) {
         if (vue != null) {
             vue.labelJoueur.setText("Nom du joueur : " + joueur.getNomJoueur());
