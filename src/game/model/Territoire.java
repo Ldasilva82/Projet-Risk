@@ -37,6 +37,7 @@ public class Territoire {
 	}
 	
 	
+	
 	//public TypeTerritoire getTypeTerritoire() {
     	//return this.typeTerritoire};
     
@@ -66,8 +67,10 @@ public class Territoire {
 		this.type = type;
 	}
 	
-	//public TypeTerritoire setTypeTerritoire(TypeTerritoire type) {
-    	//return this.typeTerritoire = type};
+	public void ajouterRegiments(int nbRegiment) {
+        this.nbRegiment += nbRegiment;
+    }
+
     
 
 	

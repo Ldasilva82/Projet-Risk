@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+import game.vue.Vue;
+
 public class Plateau extends AbstractModel {
 	// Attributes
 	protected ArrayList<Joueur> joueurs;
@@ -19,8 +21,8 @@ public class Plateau extends AbstractModel {
 	protected int nbTour;
 	protected Territoire selectedTerritoire;
 	private ArrayList<Continent> listeContinents;
-	private int nbEchange;
-	private ArrayList<Carte> deck;
+	public int nbEchange;
+	private ArrayList<Carte> deck = new ArrayList<>();
 	protected Scanner scanner;
 	protected ArrayList<Joueur> joueurElimine;
 
@@ -35,7 +37,8 @@ public class Plateau extends AbstractModel {
 		this.listeTerritoires = new ArrayList<Territoire>();
 		this.listeContinents = new ArrayList<Continent>();
 		this.joueurElimine = new ArrayList<Joueur>();
-		this.scanner = new Scanner(System.in);		
+		this.scanner = new Scanner(System.in);	
+		this.nbEchange = 9;
 		
 		for(int y=0; y<this.getHauteur(); y++) {
 			for (int x=0; x<this.getLargeur(); x++) {
@@ -465,10 +468,31 @@ public class Plateau extends AbstractModel {
         europe.setTerritoiresList(new Territoire[] {islande, gb, europeOuest, europeSud, europeNord, scandinavie, russie});
         australie.setTerritoiresList(new Territoire[] {indonesie, nouvGuinee, australieOccidentale, australieOrientale});
         
-//        Joueur joueurProprioFactice = new Joueur("Lambert","Paul");
-//        russie.setProprietaire(joueurProprioFactice);
-//        
-	}
+      /// DECK DE CARTES
+        // Liste des territoires et leurs types
+           String[] territoiresInfanterie = {"Islande", "Kamchatka", "Mongolie", "Chine", "Moyen-Orient", "Asie du Sud-Est", "Nouvelle Guinée", "Egypte", "Afrique Orientale", "Afrique Centrale", "Alaska", "Venezuela", "Pérou", "Argentine"};
+           String[] territoiresArtillerie = {"Grande-Bretagne", "Europe de l'Ouest", "Europe du Sud", "Europe du Nord", "Japon", "Indonésie", "Australie Occidentale", "Australie Orientale", "Afrique du Sud", "Territoires du Nord-Ouest", "Etats-Unis de l'Ouest", "Etats-Unis de l'Est", "Amerique Centrale", "Brésil"};
+           String[] territoiresCavalerie = {"Scandinavie", "Russie", "Oural", "Sibérie", "Yakoutie", "Irkoutsk", "Afghanistan", "Inde", "Afrique du Nord", "Madagascar", "Groenland", "Alberta", "Ontario", "Canada de l'Est"};
+
+           // Créer les cartes pour les territoires de chaque type
+           for (String territoire : territoiresInfanterie) {
+               deck.add(new CarteTerritoire(new Territoire(territoire), TypeCarte.INFANTERIE));
+           }
+           for (String territoire : territoiresArtillerie) {
+               deck.add(new CarteTerritoire(new Territoire(territoire), TypeCarte.ARTILLERIE));
+           }
+           for (String territoire : territoiresCavalerie) {
+               deck.add(new CarteTerritoire(new Territoire(territoire), TypeCarte.CAVALERIE));
+           }
+           // Créer les cartes Joker
+           for (int i = 0; i < 2; i++) {
+               deck.add(new CarteJoker());
+           }
+
+           // Mélanger le deck de cartes
+           Collections.shuffle(deck);
+	}       
+	
 	
 	
 	// Methods 
@@ -538,6 +562,10 @@ public class Plateau extends AbstractModel {
 	public void setTypeCase(int x, int y, TypeCase tc) {
 		// TODO Auto-generated method stub	
 	}
+	public void setVue(Vue v) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	public void setTerritoireSelected(Territoire terSelected) {
 		this.selectedTerritoire = terSelected;
@@ -559,15 +587,6 @@ public class Plateau extends AbstractModel {
 	}
 	
 	//------------------------Others--------------------------
-	public List<String> Deck() {
-		Carte carte = new Carte();
-		List<String> combinedList = carte.combineLists();
-		for (String card : combinedList) {
-			System.out.println(card);
-		}
-		return combinedList;
-	}
-
 	
 //	Méthode gérant le déroulement d'un tour en faisant appel aux autres méthodes
 	public void nouveauTour() {

@@ -1,23 +1,55 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package game.vue;
+ package game.vue;
+
+import java.util.ArrayList;
+
+import javax.swing.GroupLayout;
+
 
 import game.controler.AbstractControler;
 import game.model.AbstractModel;
+import game.model.Carte;
+import game.model.CarteJoker;
+import game.model.CarteTerritoire;
+
+import game.model.Joueur;
+import game.model.Plateau;
 import game.vue.observer.Observateur;
 
 /**
  *
- * @author david
+ * @author Pauline, Alex, Lucas, Ravaka, Yaning
  */
+
+ package game.vue;
+
+import java.util.ArrayList;
+
+import javax.swing.GroupLayout;
+
+
+import game.controler.AbstractControler;
+import game.model.AbstractModel;
+import game.model.Carte;
+import game.model.CarteJoker;
+import game.model.CarteTerritoire;
+
+import game.model.Joueur;
+import game.model.Plateau;
+import game.vue.observer.Observateur;
+
 public class Vue extends javax.swing.JFrame implements Observateur{
 
-    private AbstractModel model;
+    /**
+	 * 
+	 */
+	// Attributes
+	private static final long serialVersionUID = 1L;
+	private AbstractModel model;
     private MouseListener mouseListener;
-    private AbstractControler controler;
+    private Plateau plateauFactice;
+    
+    // Constructor
     /**
      * Creates new form 
      * @param model
@@ -25,12 +57,16 @@ public class Vue extends javax.swing.JFrame implements Observateur{
      */
     public Vue(AbstractModel model, AbstractControler controler) {
         this.model = model;
-        this.controler = controler;
+        //this.controler = controler;
         initComponents();
         this.mouseListener = new MouseListener(controler);
         this.panelJeu.addMouseListener(this.mouseListener);
+        this.plateauFactice = new Plateau(19, 14);
+        
     }
     
+    // Methods
+    /// Methode pour dessiner le plateau de jeu
     public void dessinerJeu(){
         int h = this.panelJeu.getWidth();
         int l = this.panelJeu.getHeight();
@@ -45,8 +81,8 @@ public class Vue extends javax.swing.JFrame implements Observateur{
             y = 0;
         }
         this.mouseListener.updateDimension(x, y, x+cote*model.getHauteur(), y+cote*model.getLargeur(), cote);
-        for(int xP=0; xP<model.getLargeur();xP++){
-            for(int yP=0; yP<model.getHauteur();yP++){
+        for(int xP=0; xP<model.getHauteur();xP++){
+            for(int yP=0; yP<model.getLargeur();yP++){
                 switch(model.getTypeCase(xP, yP)){
                   
                     case MER : 
@@ -203,62 +239,81 @@ public class Vue extends javax.swing.JFrame implements Observateur{
                         panelJeu.drawCaseFlecheGauche(x+xP*cote, y+yP*cote, cote);
                     break;
                 }
-                
-                
-            
+               
             }
         }
     }
     
-
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    //Methodes pour initialiser les composants
     private void initComponents() {
-
-        labelNbSourisIN = new javax.swing.JLabel();
-        labelNbFleches = new javax.swing.JLabel();
-        labelNbSourisOut = new javax.swing.JLabel();
+    	
+        labelJoueur = new javax.swing.JLabel();
+        nbEchanges= new javax.swing.JLabel();
+        cartesDuJoueur = new javax.swing.JLabel();
         panelJeu = new game.vue.PanelJeu(this);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        labelNbSourisIN.setText("jLabel1");
-
-        labelNbFleches.setText("nbFleche");
-
-        labelNbSourisOut.setText("jLabel3");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        
+        labelJoueur.setText("Joueur : " );
+        nbEchanges.setText("Nombre d'échange" );       
+        cartesDuJoueur.setText("acrtes");
+        
+        // Init un gestionnaire d'interface avec GroupLayout
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
+
+     // disposition verticale
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(labelNbSourisIN, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelNbSourisOut, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelNbFleches, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(panelJeu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelJeu, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelNbSourisIN)
-                    .addComponent(labelNbFleches)
-                    .addComponent(labelNbSourisOut)))
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(labelJoueur)
+                .addComponent(nbEchanges)
+                .addComponent(cartesDuJoueur)
+                .addComponent(panelJeu)
         );
 
+        // disposition horizontale
+        layout.setVerticalGroup(
+            layout.createSequentialGroup()
+                .addComponent(labelJoueur)
+                .addComponent(nbEchanges)
+                .addComponent(cartesDuJoueur)
+                .addComponent(panelJeu)
+        );
+
+        
         pack();
+    
     }// </editor-fold>//GEN-END:initComponents
 
+    /// Methode pour afficher les info de la partie dans les composants
+   public void afficherInfoJoueur(Joueur joueur, Vue vue) {
+        if (vue != null) {
+            vue.labelJoueur.setText("Nom du joueur : " + joueur.getNomJoueur());
 
+            ArrayList<Carte> cartes = joueur.getCartesPossedees();
+            StringBuilder cartesPossedees = new StringBuilder("Cartes possédées : ");
+            for (Carte carte : cartes) {
+                if (carte instanceof CarteTerritoire) {
+                    CarteTerritoire carteTerritoire = (CarteTerritoire) carte;
+                    cartesPossedees.append(carteTerritoire.getType()).append(" (").append(carteTerritoire.getTerritoire().getNomTerritoire()).append("), ");
+                } else if (carte instanceof CarteJoker) {
+                    cartesPossedees.append(carte.getType()).append(", ");
+                }
+            }
+            vue.cartesDuJoueur.setText(cartesPossedees.toString());
+
+            
+			int nbEchanges = plateauFactice.getNbEchange(); // Utilisez l'instance factice du plateau
+            vue.nbEchanges.setText("Nombre d'échanges : " + nbEchanges);
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel labelNbFleches;
-    private javax.swing.JLabel labelNbSourisIN;
-    private javax.swing.JLabel labelNbSourisOut;
+    private javax.swing.JLabel nbEchanges;
+    private javax.swing.JLabel labelJoueur;
+    private javax.swing.JLabel cartesDuJoueur;
     private game.vue.PanelJeu panelJeu;
     // End of variables declaration//GEN-END:variables
 
